@@ -1,0 +1,76 @@
+{# Simulateur Résidence Principale (maquette UI) #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Résidence principale — Arkemis{% endblock %}
+
+{% block body %}
+  <h4>Résidence principale</h4>
+  <p class="grey-text text-darken-1">Projetez votre patrimoine lors de l'achat d'une résidence principale. Les champs suivants couvrent les hypothèses clés.</p>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Hypothèses de base</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="purchase_price" name="purchasePrice" type="number" step="0.01">
+          <label for="purchase_price">Prix d'achat (€)</label>
+          <span class="helper-text">Hors frais de notaire et travaux initiaux.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="down_payment" name="downPayment" type="number" step="0.01">
+          <label for="down_payment">Apport (€)</label>
+          <span class="helper-text">Montant d'épargne mobilisé.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="transaction_costs" name="transactionCosts" type="number" step="0.01">
+          <label for="transaction_costs">Frais d'acquisition (€)</label>
+          <span class="helper-text">Notaire, garantie, dossier, courtage.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="appreciation_rate" name="appreciationRate" type="number" step="0.01">
+          <label for="appreciation_rate">Appréciation du bien (%/an)</label>
+          <span class="helper-text">Hypothèse de croissance du prix (peut être 0%).</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="holding_years" name="holdingYears" type="number" step="1">
+          <label for="holding_years">Horizon (années)</label>
+          <span class="helper-text">Durée de détention pour la projection.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="opportunity_return" name="opportunityReturn" type="number" step="0.01">
+          <label for="opportunity_return">Rendement alternatif (%/an)</label>
+          <span class="helper-text">Servira à comparer face à une location + investissement.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Charges récurrentes</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="property_tax" name="propertyTax" type="number" step="0.01">
+          <label for="property_tax">Taxe foncière (€ / an)</label>
+          <span class="helper-text">Selon commune et base cadastrale.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="hoa_fees" name="hoaFees" type="number" step="0.01">
+          <label for="hoa_fees">Charges copropriété (€ / an)</label>
+          <span class="helper-text">Syndic, entretien, fonds travaux.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="insurance_home" name="insuranceHome" type="number" step="0.01">
+          <label for="insurance_home">Assurance habitation (€ / an)</label>
+          <span class="helper-text">Responsabilité civile et multirisque habitation.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-align">
+    <a class="btn waves-effect waves-light" disabled>Simuler (à venir)</a>
+  </div>
+{% endblock %}

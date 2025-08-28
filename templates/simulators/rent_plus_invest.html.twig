@@ -1,0 +1,59 @@
+{# Louer + investir l'apport (maquette UI) #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Louer + investir l'apport — Arkemis{% endblock %}
+
+{% block body %}
+  <h4>Louer + investir l'apport</h4>
+  <p class="grey-text text-darken-1">Comparez l'option de louer sa résidence principale et d'investir l'apport initial sur les marchés.</p>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Hypothèses de location</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="rent_amount" name="rentAmount" type="number" step="0.01">
+          <label for="rent_amount">Loyer mensuel (€)</label>
+          <span class="helper-text">Loyer hors charges récupérables.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="rent_increase" name="rentIncrease" type="number" step="0.01">
+          <label for="rent_increase">Indexation loyer (%/an)</label>
+          <span class="helper-text">Indice IRL estimé.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="insurance_home" name="insuranceHome" type="number" step="0.01">
+          <label for="insurance_home">Assurance habitation (€ / an)</label>
+          <span class="helper-text">Coût estimatif du contrat locataire.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Investissement de l'apport</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="initial_capital" name="initialCapital" type="number" step="0.01">
+          <label for="initial_capital">Capital investi (€)</label>
+          <span class="helper-text">Équivalent à l'apport qui aurait été utilisé pour l'achat.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="expected_return" name="expectedReturn" type="number" step="0.01">
+          <label for="expected_return">Rendement attendu (%/an)</label>
+          <span class="helper-text">Rendement moyen annualisé hypothétique.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="fees" name="fees" type="number" step="0.01">
+          <label for="fees">Frais (%/an)</label>
+          <span class="helper-text">Frais de gestion, TER, etc.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-align">
+    <a class="btn waves-effect waves-light" disabled>Simuler (à venir)</a>
+  </div>
+{% endblock %}

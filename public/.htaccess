@@ -1,0 +1,36 @@
+DirectoryIndex index.php
+
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
+    # Désactive le MultiViews et l'indexation de répertoires pour éviter des conflits de routing
+    # (Apache pourra sinon faire correspondre des URL partielles au mauvais fichier)
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si la requête cible un fichier ou dossier physique, on laisse Apache le servir
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Préserve l'en-tête Authorization (utile pour certaines apps)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Sinon on redirige tout vers index.php (front controller Symfony)
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Si mod_rewrite n'est pas disponible, les URL jolies ne fonctionneront pas.
+# Assurez-vous d'activer mod_rewrite et AllowOverride All dans la conf Apache:
+#
+# <VirtualHost *:80>
+#   ServerName arkemis.local
+#   DocumentRoot "c:/wamp64/www/Arkemis/public"
+#   <Directory "c:/wamp64/www/Arkemis/public">
+#       AllowOverride All
+#       Require all granted
+#       Options Indexes FollowSymLinks
+#   </Directory>
+# </VirtualHost>

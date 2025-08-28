@@ -1,0 +1,135 @@
+{# Simulateur Investissement Locatif (maquette UI) #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Investissement locatif — Arkemis{% endblock %}
+
+{% block body %}
+  <h4>Investissement locatif</h4>
+  <p class="grey-text text-darken-1">Renseignez les hypothèses d'achat, de loyer, de charges et de fiscalité. Les règles courantes sont listées pour guider la saisie.</p>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Hypothèses d'achat</span>
+      <div class="row">
+        <div class="input-field col s12 m3">
+          <input id="purchase_price" name="purchasePrice" type="number" step="0.01">
+          <label for="purchase_price">Prix d'achat (€)</label>
+          <span class="helper-text">Hors frais; inclure annexes si nécessité.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="renovation" name="renovation" type="number" step="0.01">
+          <label for="renovation">Travaux initiaux (€)</label>
+          <span class="helper-text">Rénovation, ameublement (LMNP), mises aux normes.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="notary_fees" name="notaryFees" type="number" step="0.01">
+          <label for="notary_fees">Frais d'acquisition (€)</label>
+          <span class="helper-text">Notaire, garantie, dossier, courtage.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="down_payment" name="downPayment" type="number" step="0.01">
+          <label for="down_payment">Apport (€)</label>
+          <span class="helper-text">Montant d'épargne mobilisé.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Revenus locatifs</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="monthly_rent" name="monthlyRent" type="number" step="0.01">
+          <label for="monthly_rent">Loyer mensuel (€)</label>
+          <span class="helper-text">Hors charges locatives récupérables.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="vacancy_rate" name="vacancyRate" type="number" step="0.01">
+          <label for="vacancy_rate">Vacance locative (%/an)</label>
+          <span class="helper-text">Provision de période sans locataire.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="rent_increase" name="rentIncrease" type="number" step="0.01">
+          <label for="rent_increase">Indexation loyer (%/an)</label>
+          <span class="helper-text">Indice IRL ou libre en meublé selon marché.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Charges et gestion</span>
+      <div class="row">
+        <div class="input-field col s12 m3">
+          <input id="property_tax" name="propertyTax" type="number" step="0.01">
+          <label for="property_tax">Taxe foncière (€ / an)</label>
+          <span class="helper-text">Non récupérable sur le locataire.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="hoa_fees_landlord" name="hoaFeesLandlord" type="number" step="0.01">
+          <label for="hoa_fees_landlord">Charges bailleur (€ / an)</label>
+          <span class="helper-text">Part non récupérable de copropriété.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="maintenance" name="maintenance" type="number" step="0.01">
+          <label for="maintenance">Entretien (€ / an)</label>
+          <span class="helper-text">Petits travaux récurrents.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="property_management" name="propertyManagement" type="number" step="0.01">
+          <label for="property_management">Gestion locative (€ / an)</label>
+          <span class="helper-text">% du loyer ou forfait annuel.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m3">
+          <input id="landlord_insurance" name="landlordInsurance" type="number" step="0.01">
+          <label for="landlord_insurance">Assurance PNO/GLI (€ / an)</label>
+          <span class="helper-text">Propriétaire non occupant, garantie loyers impayés.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="accounting_fees" name="accountingFees" type="number" step="0.01">
+          <label for="accounting_fees">Comptable (€ / an)</label>
+          <span class="helper-text">Souvent nécessaire en LMNP au réel.</span>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="other_costs" name="otherCosts" type="number" step="0.01">
+          <label for="other_costs">Autres coûts (€ / an)</label>
+          <span class="helper-text">Petits frais, publicité, déplacements, etc.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Régime fiscal</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <select id="tax_regime" name="taxRegime">
+            <option value="micro">Micro</option>
+            <option value="real">Réel</option>
+          </select>
+          <label for="tax_regime">Régime (foncier ou LMNP)</label>
+          <span class="helper-text">Nu: micro-foncier (abattement 30%) ou réel. Meublé: micro-BIC (abattement 50%/71%) ou réel.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="marginal_tax_rate" name="marginalTaxRate" type="number" step="0.01">
+          <label for="marginal_tax_rate">TMI (%) + PS</label>
+          <span class="helper-text">TMI sur revenus + prélèvements sociaux (17.2%).</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="amortization_years" name="amortizationYears" type="number" step="1">
+          <label for="amortization_years">Amortissements (années)</label>
+          <span class="helper-text">LMNP réel: amortissement immeuble, mobilier, travaux.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-align">
+    <a class="btn waves-effect waves-light" disabled>Simuler (à venir)</a>
+  </div>
+{% endblock %}

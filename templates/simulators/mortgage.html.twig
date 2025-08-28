@@ -1,0 +1,155 @@
+{# Simulateur de crédit immobilier (maquette UI) #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Crédit immobilier — Arkemis{% endblock %}
+
+{% block body %}
+  <h4>Crédit immobilier</h4>
+  <p class="grey-text text-darken-1">Renseignez les paramètres de votre prêt. Les champs incluent les règles usuelles (assurance, frais, PTZ). Aucune simulation n'est encore calculée.</p>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Paramètres du prêt</span>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="property_price" name="propertyPrice" type="number" step="0.01">
+          <label for="property_price">Prix du bien (€)</label>
+          <span class="helper-text">Prix acte en main hors frais de notaire. Incluez les annexes si applicables.</span>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="down_payment" name="downPayment" type="number" step="0.01">
+          <label for="down_payment">Apport (€)</label>
+          <span class="helper-text">Somme mobilisée au comptant (épargne). Peut réduire le montant emprunté.</span>
+        </div>
+
+        <div class="input-field col s12 m4">
+          <input id="loan_amount" name="loanAmount" type="number" step="0.01">
+          <label for="loan_amount">Montant emprunté (€)</label>
+          <span class="helper-text">Montant total du crédit hors PTZ. Calculé ou saisi librement pour la maquette.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="interest_rate" name="interestRate" type="number" step="0.001">
+          <label for="interest_rate">Taux nominal (%)</label>
+          <span class="helper-text">Taux annuel fixe hors assurance (TAEG non inclus). Exemple: 4.20</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="loan_years" name="loanYears" type="number" step="1">
+          <label for="loan_years">Durée (années)</label>
+          <span class="helper-text">Durée totale du prêt (10 à 30 ans usuellement).</span>
+        </div>
+
+        <div class="input-field col s12 m4">
+          <input id="insurance_rate" name="insuranceRate" type="number" step="0.001">
+          <label for="insurance_rate">Assurance (%)</label>
+          <span class="helper-text">Taux annuel de l'assurance emprunteur (sur capital initial ou restant dû selon contrat).</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="notary_fees" name="notaryFees" type="number" step="0.01">
+          <label for="notary_fees">Frais de notaire (€)</label>
+          <span class="helper-text">Ancien: ~7-8% du prix; Neuf: ~2-3%. Inclut droits d'enregistrement, émoluments, débours.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="broker_fees" name="brokerFees" type="number" step="0.01">
+          <label for="broker_fees">Frais de courtage (€)</label>
+          <span class="helper-text">Honoraires du courtier, parfois inclus dans le TAEG.</span>
+        </div>
+
+        <div class="input-field col s12 m4">
+          <input id="file_fees" name="fileFees" type="number" step="0.01">
+          <label for="file_fees">Frais de dossier (€)</label>
+          <span class="helper-text">Frais bancaires d'ouverture du crédit.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="warranty_fees" name="warrantyFees" type="number" step="0.01">
+          <label for="warranty_fees">Garantie (€)</label>
+          <span class="helper-text">Hypothèque, caution (type Crédit Logement) ou PPD selon cas.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="early_repayment_penalty" name="earlyRepaymentPenalty" type="number" step="0.01">
+          <label for="early_repayment_penalty">IRA (€)</label>
+          <span class="helper-text">Indemnité de remboursement anticipé (max 6 mois d'intérêts, plafonnée à 3%).</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Prêt à Taux Zéro (PTZ)</span>
+      <p class="grey-text text-darken-1">Le PTZ est soumis à conditions (plafonds de revenus, zone, nature du bien). Ici, on prépare les champs pour l'intégrer.</p>
+      <div class="row" style="margin-top: 16px;">
+        <div class="switch col s12">
+          <label>
+            Désactivé
+            <input id="ptz_enabled" name="ptzEnabled" type="checkbox">
+            <span class="lever"></span>
+            Activé
+          </label>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="ptz_amount" name="ptzAmount" type="number" step="0.01">
+          <label for="ptz_amount">Montant PTZ (€)</label>
+          <span class="helper-text">Plafonné selon zone et composition du foyer (barèmes officiels).</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="ptz_deferred_years" name="ptzDeferredYears" type="number" step="1">
+          <label for="ptz_deferred_years">Différé (années)</label>
+          <span class="helper-text">Durée de différé de remboursement (partiel/total) suivant profil.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="ptz_total_years" name="ptzTotalYears" type="number" step="1">
+          <label for="ptz_total_years">Durée PTZ (années)</label>
+          <span class="helper-text">Durée totale du PTZ incluant différé et amortissement.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Charges récurrentes</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="property_tax" name="propertyTax" type="number" step="0.01">
+          <label for="property_tax">Taxe foncière (€ / an)</label>
+          <span class="helper-text">Basée sur valeur locative cadastrale; dépend de la commune.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="hoa_fees" name="hoaFees" type="number" step="0.01">
+          <label for="hoa_fees">Charges de copropriété (€ / an)</label>
+          <span class="helper-text">Entretien, syndic, fonds travaux (loi ALUR).</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="maintenance" name="maintenance" type="number" step="0.01">
+          <label for="maintenance">Entretien (€ / an)</label>
+          <span class="helper-text">Provision pour travaux courants (toiture, chaudière, etc.).</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Aides et dispositifs</span>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="energy_subsidies" name="energySubsidies" type="number" step="0.01">
+          <label for="energy_subsidies">Aides rénovation énergétique (€)</label>
+          <span class="helper-text">Ex: MaPrimeRénov', certificats d'économie d'énergie (CEE).</span>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="other_grants" name="otherGrants" type="number" step="0.01">
+          <label for="other_grants">Autres aides (€)</label>
+          <span class="helper-text">Aides locales, prêt action logement, etc.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-align">
+    <a class="btn waves-effect waves-light" disabled>
+      Simuler (à venir)
+      <i class="material-icons right">play_arrow</i>
+    </a>
+  </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{# Index des simulateurs #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Simulateurs — Arkemis{% endblock %}
+
+{% block body %}
+  <div class="section">
+    <h4>Simulateurs</h4>
+    <p class="grey-text text-darken-1">Choisissez un simulateur ci-dessous. Chaque formulaire détaille les champs à remplir.</p>
+  </div>
+
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <i class="material-icons circle blue">home</i>
+      <span class="title">Crédit immobilier</span>
+      <p>Prêt amortissable, assurance, frais, PTZ.<br>
+      <a href="{{ path('app_simulators_mortgage') }}">Ouvrir</a></p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle indigo">family_restroom</i>
+      <span class="title">Résidence principale</span>
+      <p>Patrimoine projeté avec achat RP.<br>
+      <a href="{{ path('app_simulators_primary_residence') }}">Ouvrir</a></p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle teal">apartment</i>
+      <span class="title">Investissement locatif</span>
+      <p>Cash-flow, fiscalité, TRI, vacance, travaux.<br>
+      <a href="{{ path('app_simulators_rental_investment') }}">Ouvrir</a></p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">trending_up</i>
+      <span class="title">Placement en bourse</span>
+      <p>Versements, frais, fiscalité PEA/CTO, volatilité.<br>
+      <a href="{{ path('app_simulators_stock_investment') }}">Ouvrir</a></p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle orange">savings</i>
+      <span class="title">Louer + investir l'apport</span>
+      <p>Comparaison patrimoniale alternative.<br>
+      <a href="{{ path('app_simulators_rent_plus_invest') }}">Ouvrir</a></p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle grey">compare_arrows</i>
+      <span class="title">Acheter vs Louer</span>
+      <p>Comparateur achat RP vs location + placements.<br>
+      <a href="{{ path('app_simulators_buy_vs_rent') }}">Ouvrir</a></p>
+    </li>
+  </ul>
+{% endblock %}

@@ -1,3 +1,34 @@
+/* CSS généré/complément — restera léger, le gros du style vient de Materialize */
 body {
-    background-color: skyblue;
+    background-color: #fafafa;
+}
+
+main.container {
+    max-width: 1100px;
+}
+
+/* Symfony Web Debug Toolbar compatibility with Materialize */
+.sf-toolbar {
+    z-index: 2147483647 !important; /* au-dessus des overlays Materialize */
+}
+.sf-toolbar a {
+    color: inherit !important; /* évite la recoloration des liens par Materialize */
+    text-decoration: none;
+}
+.sf-toolbar .sf-toolbarreset {
+    background: #222 !important; /* restaure fond sombre par défaut */
+    color: #eee !important;
+}
+
+/* Sticky footer (sans overlay): le footer colle en bas quand le contenu est court) */
+html, body {
+    height: 100%;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
 }

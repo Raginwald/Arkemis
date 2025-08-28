@@ -1,0 +1,114 @@
+{# Comparateur Acheter vs Louer (maquette UI) #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Acheter vs Louer — Arkemis{% endblock %}
+
+{% block body %}
+  <h4>Acheter vs Louer</h4>
+  <p class="grey-text text-darken-1">Comparez l'achat d'une résidence principale et la location avec investissement. Cette maquette prépare les champs pour une comparaison détaillée.</p>
+
+  <div class="row">
+    <div class="col s12 l6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Scénario Achat</span>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="buy_price" name="buyPrice" type="number" step="0.01">
+              <label for="buy_price">Prix d'achat (€)</label>
+              <span class="helper-text">Hors frais d'acquisition.</span>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="buy_down_payment" name="buyDownPayment" type="number" step="0.01">
+              <label for="buy_down_payment">Apport (€)</label>
+              <span class="helper-text">Capital mobilisé.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="buy_interest" name="buyInterest" type="number" step="0.01">
+              <label for="buy_interest">Taux prêt (%)</label>
+              <span class="helper-text">Taux nominal hors assurance.</span>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="buy_years" name="buyYears" type="number" step="1">
+              <label for="buy_years">Durée (années)</label>
+              <span class="helper-text">Horizon d'emprunt.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="buy_property_tax" name="buyPropertyTax" type="number" step="0.01">
+              <label for="buy_property_tax">Taxe foncière (€ / an)</label>
+              <span class="helper-text">Charge propriétaire.</span>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="buy_maintenance" name="buyMaintenance" type="number" step="0.01">
+              <label for="buy_maintenance">Entretien (€ / an)</label>
+              <span class="helper-text">Provision pour travaux.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 l6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Scénario Location + Investissement</span>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="rent_amount" name="rentAmount" type="number" step="0.01">
+              <label for="rent_amount">Loyer (€ / mois)</label>
+              <span class="helper-text">Hors charges récupérables.</span>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="rent_index" name="rentIndex" type="number" step="0.01">
+              <label for="rent_index">Indexation loyer (%/an)</label>
+              <span class="helper-text">Hypothèse d'évolution (IRL).</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <input id="invest_return" name="investReturn" type="number" step="0.01">
+              <label for="invest_return">Rendement investi (%/an)</label>
+              <span class="helper-text">Rendement moyen envisagé.</span>
+            </div>
+            <div class="input-field col s12 m6">
+              <input id="invest_fees" name="investFees" type="number" step="0.01">
+              <label for="invest_fees">Frais (%/an)</label>
+              <span class="helper-text">Frais récurrents de gestion.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Paramètres globaux</span>
+      <div class="row">
+        <div class="input-field col s12 m4">
+          <input id="years" name="years" type="number" step="1">
+          <label for="years">Horizon (années)</label>
+          <span class="helper-text">Durée de comparaison.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="inflation" name="inflation" type="number" step="0.01">
+          <label for="inflation">Inflation (%/an)</label>
+          <span class="helper-text">Utilisée pour indexer certaines charges.</span>
+        </div>
+        <div class="input-field col s12 m4">
+          <input id="capitalization_rate" name="capitalizationRate" type="number" step="0.01">
+          <label for="capitalization_rate">Rdt alternatif (%/an)</label>
+          <span class="helper-text">Taux servant à actualiser/valoriser le cash flow.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-align">
+    <a class="btn waves-effect waves-light" disabled>Comparer (à venir)</a>
+  </div>
+{% endblock %}
