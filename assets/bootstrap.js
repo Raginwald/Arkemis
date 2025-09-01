@@ -1,5 +1,6 @@
 import { startStimulusApp } from '@symfony/stimulus-bundle';
+import MaterializeController from './controllers/materialize_controller.js';
 
 const app = startStimulusApp();
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+// Enregistrement explicite de notre contrôleur local
+app.register('materialize', MaterializeController);

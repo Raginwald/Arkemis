@@ -20,6 +20,35 @@ main.container {
     color: #eee !important;
 }
 
+/* Footer compact (encore plus dense) */
+.page-footer {
+    padding-top: 0 !important; /* réduire au minimum */
+}
+.page-footer .container {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+.page-footer .row {
+    margin-bottom: 0 !important;
+}
+.page-footer p {
+    margin: 2px 0 !important;
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+.page-footer .footer-compact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 28px;
+    line-height: 28px;
+    font-size: 0.85rem;
+}
+.page-footer .footer-compact .sep {
+    opacity: .7;
+}
+
 /* Sticky footer (sans overlay): le footer colle en bas quand le contenu est court) */
 html, body {
     height: 100%;

@@ -8,23 +8,10 @@ import './bootstrap.js';
 // Import du CSS compilé (via Asset Mapper). On garde un fichier CSS unique.
 import './styles/app.css';
 
-// Initialisation Materialize (JS) après chargement du DOM
-document.addEventListener('DOMContentLoaded', () => {
-	// Sidenav (menu latéral)
-	const sidenavs = document.querySelectorAll('.sidenav');
-	M.Sidenav.init(sidenavs, {});
+// La gestion Materialize est désormais déléguée au contrôleur Stimulus "materialize"
 
-	// Dropdowns dans la navbar
-	const dropdowns = document.querySelectorAll('.dropdown-trigger');
-	M.Dropdown.init(dropdowns, { constrainWidth: false, coverTrigger: false });
-
-	// Collapsible pour le sous-menu mobile
-	const collapsibles = document.querySelectorAll('.collapsible');
-	M.Collapsible.init(collapsibles, {});
-
-	// Selects Materialize
-	const selects = document.querySelectorAll('select');
-	M.FormSelect.init(selects, {});
-});
+// Ajuste la barre de progression Turbo: ne l’afficher que si la requête est vraiment lente
+import * as Turbo from '@hotwired/turbo';
+Turbo.setProgressBarDelay(600); // ms; augmentez si besoin ou mettez 0 pour l’afficher immédiatement
 
 console.log('Arkemis UI ready');

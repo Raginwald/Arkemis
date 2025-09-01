@@ -14,7 +14,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(): Response
     {
-        // Affiche une page d'accueil type dashboard avec accès rapide aux simulateurs
-        return $this->render('home/index.html.twig');
+    // Affiche une page d'accueil type dashboard avec accès rapide aux simulateurs
+    // Ajoute des en-têtes HTTP de cache pour accélérer les visites suivantes (surtout en prod)
+    $response = $this->render('home/index.html.twig');
+    $response->setPublic();         // cacheable par des proxies/balancers
+    $response->setMaxAge(300);      // cache navigateur ~5 minutes
+    $response->setSharedMaxAge(600);// cache partagé ~10 minutes
+    return $response;
     }
 }
