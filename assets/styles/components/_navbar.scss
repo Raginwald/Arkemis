@@ -1,0 +1,7 @@
+/* Component: navbar (proche de Materialize) */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000; // au-dessus du contenu
+  padding: 0 8px;
+}

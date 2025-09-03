@@ -1,88 +1,104 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {# Désactive l'affichage des snapshots Turbo pendant la navigation pour éviter tout écrasement de saisie #}
-        <meta name="turbo-cache-control" content="no-preview">
-        <title>{% block title %}Arkemis — Simulateurs{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# Désactive l'affichage des snapshots Turbo pendant la navigation pour éviter tout écrasement de saisie #}
+    <meta name="turbo-cache-control" content="no-preview">
+    <title>{% block title %}Arkemis — Simulateurs{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-        {# Material Icons et Materialize CSS (Material Design) #}
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    {# Material Icons et Materialize CSS #}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-        {% block stylesheets %}
-            {{ vite_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-        <body class="grey lighten-5" data-controller="materialize">
-        <!-- Navbar -->
-        <nav class="blue-grey darken-4">
-            <div class="nav-wrapper container">
-                <a href="{{ path('app_home') }}" class="brand-logo">Arkemis</a>
-                <a href="#" data-target="sidenav-main" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li>
-                        <a class="dropdown-trigger" href="#!" data-target="dropdown-simulators">Simulateurs<i class="material-icons right">arrow_drop_down</i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Dropdown desktop -->
-        <ul id="dropdown-simulators" class="dropdown-content">
-            <li><a href="{{ path('app_simulators_mortgage') }}">Crédit immobilier</a></li>
-            <li><a href="{{ path('app_simulators_primary_residence') }}">Résidence principale</a></li>
-            <li><a href="{{ path('app_simulators_rental_investment') }}">Investissement locatif</a></li>
-            <li><a href="{{ path('app_simulators_stock_investment') }}">Placement en bourse</a></li>
-            <li><a href="{{ path('app_simulators_rent_plus_invest') }}">Louer + investir l'apport</a></li>
-            <li class="divider" tabindex="-1"></li>
-            <li><a href="{{ path('app_simulators_buy_vs_rent') }}">Acheter vs Louer</a></li>
-        </ul>
-
-        <!-- Sidenav mobile -->
-            <ul class="sidenav" id="sidenav-main">
-                <li><a href="{{ path('app_home') }}" class="waves-effect sidenav-close"><i class="material-icons">dashboard</i>Accueil</a></li>
+    {% block stylesheets %}
+        {{ vite_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar" data-turbo-permanent>
+        <div class="nav-wrapper">
+            <a href="{{ path('app_home') }}" class="brand-logo">Arkemis</a>
+            <a href="#!" data-target="sidenav-main" class="sidenav-trigger" data-turbo="false"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li>
-                    <ul class="collapsible collapsible-accordion">
-                        <li>
-                            <a class="collapsible-header waves-effect"><i class="material-icons">calculate</i>Simulateurs<i class="material-icons right">arrow_drop_down</i></a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">Crédit immobilier</a></li>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">Résidence principale</a></li>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">Investissement locatif</a></li>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">Placement en bourse</a></li>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">Louer + investir l'apport</a></li>
-                                    <li class="divider" tabindex="-1"></li>
-                                    <li><a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">Acheter vs Louer</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                    <a class="dropdown-trigger" href="#!" data-target="dropdown-simulators" data-turbo="false" data-cover-trigger="false" data-constrain-width="false">Simulateurs<i class="material-icons right">arrow_drop_down</i></a>
                 </li>
             </ul>
+        </div>
+    </nav>
 
-        <!-- Contenu -->
-        <main class="container" style="margin-top: 24px; margin-bottom: 48px;">
-            {% block body %}{% endblock %}
-        </main>
+    <!-- Dropdown desktop -->
+    <ul id="dropdown-simulators" class="dropdown-content" data-turbo-permanent>
+        <li><a href="{{ path('app_simulators_mortgage') }}">Crédit immobilier</a></li>
+        <li><a href="{{ path('app_simulators_primary_residence') }}">Résidence principale</a></li>
+        <li><a href="{{ path('app_simulators_rental_investment') }}">Investissement locatif</a></li>
+        <li><a href="{{ path('app_simulators_stock_investment') }}">Placement en bourse</a></li>
+        <li><a href="{{ path('app_simulators_rent_plus_invest') }}">Louer + investir l'apport</a></li>
+        <li class="divider" tabindex="-1"></li>
+        <li><a href="{{ path('app_simulators_buy_vs_rent') }}">Acheter vs Louer</a></li>
+    </ul>
 
-            <!-- Footer (ligne unique, centré) -->
-            <footer class="page-footer blue-grey darken-4">
-                <div class="container footer-compact center-align grey-text text-lighten-4">
-                    <span>Arkemis — Outils de simulation patrimoniale (maquette UI)</span>
-                    <span class="sep">•</span>
-                    <span>© {{ "now"|date('Y') }} Arkemis</span>
-                </div>
-            </footer>
+    <!-- Sidenav mobile -->
+    <ul class="sidenav" id="sidenav-main" data-turbo-permanent>
+        <li><a href="{{ path('app_home') }}" class="waves-effect sidenav-close"><i class="material-icons">dashboard</i>Accueil</a></li>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect"><i class="material-icons">calculate</i>Simulateurs<i class="material-icons right">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">Crédit immobilier</a></li>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">Résidence principale</a></li>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">Investissement locatif</a></li>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">Placement en bourse</a></li>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">Louer + investir l'apport</a></li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li><a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">Acheter vs Louer</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-        <!-- JS: Materialize + app.js via importmap -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        {% block javascripts %}
-            {{ vite_entry_script_tags('app') }}
-        {% endblock %}
-    </body>
+    <!-- Contenu -->
+    <main class="container">
+        {% block body %}{% endblock %}
+    </main>
+
+    <!-- Footer (ligne unique, centré) -->
+    <footer class="page-footer">
+        <div class="container footer-content center-align grey-text text-lighten-4">
+            <span>Arkemis — Outils de simulation patrimoniale (maquette UI)</span>
+            <span class="footer-separator">•</span>
+            <span>© {{ "now"|date('Y') }} Arkemis</span>
+        </div>
+    </footer>
+
+    <!-- JS: Materialize + app.js via Vite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Initialisation automatique de tous les composants Materialize
+        // sans Stimulus ni Turbo. Fonctionne sur chargement complet.
+        (function initMaterializeAuto() {
+            function boot() {
+                if (window.M && typeof M.AutoInit === 'function') {
+                    M.AutoInit();
+                }
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', boot, { once: true });
+            } else {
+                boot();
+            }
+        })();
+    </script>
+    {% block javascripts %}
+        {{ vite_entry_script_tags('app') }}
+    {% endblock %}
+</body>
 </html>

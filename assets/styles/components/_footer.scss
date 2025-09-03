@@ -1,0 +1,17 @@
+/* Component: footer */
+.page-footer {
+  padding-bottom: 20px; // harmonise avec top par défaut
+
+  .footer {
+    &-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    &-separator {
+      opacity: 0.8;
+    }
+  }
+}

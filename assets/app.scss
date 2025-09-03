@@ -1,21 +1,6 @@
-/* Styles additionnels (complément Material Design)
- * Note: Les noms de classes restent en anglais, mais les commentaires sont en français
- */
-
-.card .card-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.helper-text {
-  opacity: 0.9;
-}
-
-main.container {
-  max-width: 1100px;
-}
-
-.sidenav .collapsible-body li a {
-  padding-left: 32px !important;
-}
+/* Point d’entrée SCSS par type d’éléments */
+@use "./styles/base/reset";
+@use "./styles/components/navbar";
+@use "./styles/components/footer";
+@use "./styles/components/card";
+@use "./styles/components/sidenav";
