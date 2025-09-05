@@ -13,7 +13,7 @@
     {# Materialize CSS est désormais compilé via Vite #}
 
     {% block stylesheets %}
-        {{ vite_entry_link_tags('app') }}
+        {{ vite_entry_link_tags('styles') }}
     {% endblock %}
 </head>
 <body>
@@ -50,32 +50,38 @@
                         <ul>
                             <li class="{% if currentRoute == 'app_simulators_mortgage' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">
+                                    <i class="material-icons">home</i>
                                     Crédit immobilier
                                 </a>
                             </li>
                             <li class="{% if currentRoute == 'app_simulators_primary_residence' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">
+                                    <i class="material-icons">house</i>
                                     Résidence principale
                                 </a>
                             </li>
                             <li class="{% if currentRoute == 'app_simulators_rental_investment' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">
+                                    <i class="material-icons">apartment</i>
                                     Investissement locatif
                                 </a>
                             </li>
                             <li class="{% if currentRoute == 'app_simulators_stock_investment' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">
+                                    <i class="material-icons">trending_up</i>
                                     Placement en bourse
                                 </a>
                             </li>
                             <li class="{% if currentRoute == 'app_simulators_rent_plus_invest' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">
+                                    <i class="material-icons">savings</i>
                                     Louer + investir l'apport
                                 </a>
                             </li>
                             <li class="divider" tabindex="-1"></li>
                             <li class="{% if currentRoute == 'app_simulators_buy_vs_rent' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">
+                                    <i class="material-icons">compare_arrows</i>
                                     Acheter vs Louer
                                 </a>
                             </li>
