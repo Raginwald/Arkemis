@@ -1,6 +1,187 @@
-/* Point d’entrée SCSS par type d’éléments */
 @use "./styles/base/reset";
-@use "./styles/components/navbar";
-@use "./styles/components/footer";
-@use "./styles/components/card";
-@use "./styles/components/sidenav";
+
+/* ==============================================
+	 Layout: sidebar + topbar
+	 ============================================== */
+.navbar {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	padding: 0 8px;
+}
+
+// Largeurs de la sidebar (desktop)
+$sidenav-width: 280px;
+$sidenav-width-collapsed: 72px; // icônes only
+
+// Dimensions de référence
+$topbar-height-desktop: 64px; // Materialize default
+$topbar-height-mobile: 56px;
+
+.navbar {
+	position: sticky;
+	top: 0;
+	z-index: 1001; // au-dessus de la sidebar
+	padding: 0 12px;
+	height: $topbar-height-mobile;
+}
+
+// Meilleure disposition: logo à gauche, burger à droite, pas de chevauchement
+.nav-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start; // burger à gauche, logo après
+	gap: 12px;
+}
+.brand-logo {
+	position: static; // éviter la position absolue de Materialize
+	transform: none !important;
+	white-space: nowrap;
+	font-weight: 600;
+	order: 1; // vient après le burger
+}
+.nav-wrapper .sidenav-trigger {
+	display: inline-flex;
+	align-items: center;
+	margin-left: 0; // reste à gauche
+	order: 0;
+}
+// Assure que Materialize ne recentre pas le logo
+.navbar .brand-logo {
+	position: relative !important;
+	left: 0 !important;
+	transform: none !important;
+	margin: 0;
+}
+
+// Desktop: topbar plus haute
+@media screen and (min-width: 992px) {
+	.navbar { height: $topbar-height-desktop; }
+}
+
+@media screen and (min-width: 992px) {
+	// Sidebar fixe, sous la topbar et pleine hauteur restante
+	.sidenav.sidenav-fixed {
+		position: fixed;
+		top: $topbar-height-desktop;
+		left: 0;
+		height: calc(100% - #{$topbar-height-desktop});
+		transform: translateX(0) !important;
+		width: $sidenav-width;
+		z-index: 1000; // sous la navbar
+	}
+	// Wrapper de contenu: c'est lui qui est décalé, pas le main container
+	.app-content {
+		margin-left: $sidenav-width;
+		width: calc(100% - #{$sidenav-width});
+	min-height: calc(100vh - #{$topbar-height-desktop});
+	display: flex;
+	flex-direction: column;
+	}
+    .app-content main.container { flex: 1 0 auto; }
+    .app-content .page-footer { margin-top: auto; }
+	// État "collapsed": sidebar totalement cachée
+	body.sidenav-collapsed {
+		.sidenav.sidenav-fixed {
+			transform: translateX(-100%) !important;
+		}
+		.app-content {
+			margin-left: 0;
+			width: 100%;
+	    min-height: calc(100vh - #{$topbar-height-desktop});
+		}
+	}
+}
+
+// Mobile/tablette: laisser Materialize gérer la drawer overlay
+@media screen and (max-width: 991px) {
+	.sidenav.sidenav-fixed {
+		// ne pas forcer transform pour laisser la version overlay
+		top: $topbar-height-mobile;
+		height: calc(100% - #{$topbar-height-mobile});
+	}
+	.app-content {
+		min-height: calc(100vh - #{$topbar-height-mobile});
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		margin-left: 0;
+	}
+	.app-content main.container { flex: 1 0 auto; }
+	.app-content .page-footer { margin-top: auto; }
+}
+
+// (supprimé) ancien forçage mobile qui cachait mal la drawer
+
+/* ==============================================
+	 Component: footer
+	 ============================================== */
+.page-footer {
+	padding-bottom: 20px; // harmonise avec top par défaut
+
+	.footer {
+		&-content {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+		}
+
+		&-separator {
+			opacity: 0.8;
+		}
+	}
+}
+
+/* ==============================================
+	 Component: cards
+	 ============================================== */
+.card {
+	.card-title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+}
+
+.helper-text {
+	opacity: 0.9;
+}
+
+/* ==============================================
+	 Component: sidenav
+	 ============================================== */
+.sidenav {
+	padding-top: 8px;
+	.collapsible-body {
+		li {
+			a {
+				padding-left: 32px !important;
+			}
+		}
+	}
+	.material-icons { margin-right: 8px; }
+
+	// Alignements propres
+	li > a,
+	.collapsible-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		height: 48px;
+		line-height: 48px;
+		padding: 0 16px;
+	}
+	// Chevron à droite
+	li > a i.right,
+	.collapsible-header i.right { margin-left: auto; }
+}
+
+/* Bouton burger positionné côté droit dans la topbar */
+.nav-wrapper .sidenav-trigger {
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Evite que le container soit trop étroit sur desktop avec sidebar */
+.app-content main.container { padding-top: 16px; }
