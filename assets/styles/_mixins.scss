@@ -1,0 +1,20 @@
+/* ==============================================
+   Helpers / Mixins
+   ============================================== */
+
+// Mixin pour créer un pictogramme à partir d'un SVG, teinté par background-color
+// - $url: chemin relatif vers le SVG (Vite résoudra et fingerprintera en build)
+// - $color: couleur d'application (par défaut currentColor)
+// - $position: position du mask
+// - $size: taille du mask
+@mixin svg-mask($url, $color, $position: left center, $size: contain) {
+  background-color: $color;
+  -webkit-mask-image: url(#{$url});
+  mask-image: url(#{$url});
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: $size;
+  mask-size: $size;
+  -webkit-mask-position: $position;
+  mask-position: $position;
+}

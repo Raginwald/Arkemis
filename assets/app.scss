@@ -1,138 +1,175 @@
 @use "./styles/base/reset";
+@use "./styles/variables" as *;
+@use "./styles/mixins" as *;
 
 /* ==============================================
-	 Layout: sidebar + topbar
+	 Layout: navbar
 	 ============================================== */
-.navbar {
-	position: sticky;
-	top: 0;
-	z-index: 1000;
-	padding: 0 8px;
-}
-
-// Largeurs de la sidebar (desktop)
-$sidenav-width: 280px;
-$sidenav-width-collapsed: 72px; // icônes only
-
-// Dimensions de référence
-$topbar-height-desktop: 64px; // Materialize default
-$topbar-height-mobile: 56px;
-
 .navbar {
 	position: sticky;
 	top: 0;
 	z-index: 1001; // au-dessus de la sidebar
 	padding: 0 12px;
 	height: $topbar-height-mobile;
-}
 
-// Meilleure disposition: logo à gauche, burger à droite, pas de chevauchement
-.nav-wrapper {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start; // burger à gauche, logo après
-	gap: 12px;
-}
-.brand-logo {
-	position: static; // éviter la position absolue de Materialize
-	transform: none !important;
-	white-space: nowrap;
-	font-weight: 600;
-	order: 1; // vient après le burger
-}
-.nav-wrapper .sidenav-trigger {
-	display: inline-flex;
-	align-items: center;
-	margin-left: 0; // reste à gauche
-	order: 0;
-}
-// Assure que Materialize ne recentre pas le logo
-.navbar .brand-logo {
-	position: relative !important;
-	left: 0 !important;
-	transform: none !important;
-	margin: 0;
-    height: 100%;
-
-    img {
-        height: 100%;
-    }
-}
-
-// Desktop: topbar plus haute
-@media screen and (min-width: 992px) {
-	.navbar { height: $topbar-height-desktop; }
-}
-
-@media screen and (min-width: 992px) {
-	// Sidebar fixe, sous la topbar et pleine hauteur restante
-	.sidenav.sidenav-fixed {
-		position: fixed;
-		top: $topbar-height-desktop;
-		left: 0;
-		height: calc(100% - #{$topbar-height-desktop});
-		transform: translateX(0) !important;
-		width: $sidenav-width;
-		z-index: 1000; // sous la navbar
+	// Desktop: topbar plus haute
+	@media screen and (min-width: 992px) {
+		height: $topbar-height-desktop;
 	}
-	// Wrapper de contenu: c'est lui qui est décalé, pas le main container
-	.app-content {
-		margin-left: $sidenav-width;
-		width: calc(100% - #{$sidenav-width});
-	min-height: calc(100vh - #{$topbar-height-desktop});
+
+	.nav-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start; // burger à gauche, logo après
+		gap: 12px;
+
+		.sidenav-trigger {
+			display: inline-flex;
+			align-items: center;
+			margin-left: 0; // reste à gauche
+			order: 0;
+		}
+	}
+
+	.brand-logo {
+		position: static !important; // éviter la position absolue de Materialize
+		left: 0 !important;
+		transform: none !important;
+		white-space: nowrap;
+		font-weight: 600;
+		order: 1; // vient après le burger
+		margin: 0;
+		height: 100%;
+        display: flex;
+        align-items: center;
+
+		// Élément logo: rendu via mask-image pour teinter le SVG
+		.logo {
+			display: inline-block;
+			height: 80%;
+			/* Ajustez la largeur/ratio si besoin */
+			aspect-ratio: 4096 / 1300;
+			// utilise le mixin avec chemin relatif (Vite gérera le hash en build)
+			@include svg-mask('./images/logo-arkemis.svg', $brand-color);
+		}
+	}
+}
+
+/* ==============================================
+	 Layout: sidenav
+	 ============================================== */
+.sidenav {
+	padding-top: 8px;
+
+	// Icônes avec espacement
+	.material-icons {
+		margin-right: 8px;
+	}
+
+	// Alignements propres pour les liens
+	li > a,
+	.collapsible-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		height: 48px;
+		line-height: 48px;
+		padding: 0 16px;
+
+		// Chevron à droite
+		i.right {
+			margin-left: auto;
+		}
+	}
+
+	// Sous-éléments indentés
+	.collapsible-body {
+		li a {
+			padding-left: 32px !important;
+		}
+	}
+
+	// Desktop: sidebar fixe
+	@media screen and (min-width: 992px) {
+		&.sidenav-fixed {
+			position: fixed;
+			top: $topbar-height-desktop;
+			left: 0;
+			height: calc(100% - #{$topbar-height-desktop});
+			transform: translateX(0) !important;
+			width: $sidenav-width;
+			z-index: 1000; // sous la navbar
+		}
+	}
+
+	// Mobile/tablette: drawer overlay
+	@media screen and (max-width: 991px) {
+		&.sidenav-fixed {
+			top: $topbar-height-mobile;
+			height: calc(100% - #{$topbar-height-mobile});
+		}
+	}
+}
+
+/* ==============================================
+	 Layout: app-content
+	 ============================================== */
+.app-content {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	margin-left: 0;
+
+	main.container {
+		flex: 1 0 auto;
+		padding-top: 16px;
 	}
-    .app-content main.container { flex: 1 0 auto; }
-    .app-content .page-footer { margin-top: auto; }
-	// État "collapsed": sidebar totalement cachée
-	body.sidenav-collapsed {
+
+	.page-footer {
+		margin-top: auto;
+	}
+
+	// Desktop: décalage pour la sidebar
+	@media screen and (min-width: 992px) {
+		margin-left: $sidenav-width;
+		width: calc(100% - #{$sidenav-width});
+		min-height: calc(100vh - #{$topbar-height-desktop});
+	}
+
+	// Mobile/tablette
+	@media screen and (max-width: 991px) {
+		min-height: calc(100vh - #{$topbar-height-mobile});
+	}
+}
+
+// État "collapsed": sidebar totalement cachée (desktop seulement)
+body.sidenav-collapsed {
+	@media screen and (min-width: 992px) {
 		.sidenav.sidenav-fixed {
 			transform: translateX(-100%) !important;
 		}
+
 		.app-content {
 			margin-left: 0;
 			width: 100%;
-	    min-height: calc(100vh - #{$topbar-height-desktop});
+			min-height: calc(100vh - #{$topbar-height-desktop});
 		}
 	}
 }
 
-// Mobile/tablette: laisser Materialize gérer la drawer overlay
-@media screen and (max-width: 991px) {
-	.sidenav.sidenav-fixed {
-		// ne pas forcer transform pour laisser la version overlay
-		top: $topbar-height-mobile;
-		height: calc(100% - #{$topbar-height-mobile});
-	}
-	.app-content {
-		min-height: calc(100vh - #{$topbar-height-mobile});
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		margin-left: 0;
-	}
-	.app-content main.container { flex: 1 0 auto; }
-	.app-content .page-footer { margin-top: auto; }
-}
-
-// (supprimé) ancien forçage mobile qui cachait mal la drawer
-
 /* ==============================================
-	 Component: footer
+	 Component: page-footer
 	 ============================================== */
 .page-footer {
 	padding-bottom: 20px; // harmonise avec top par défaut
 
-	.footer {
-		&-content {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 8px;
-		}
+	.footer-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
 
-		&-separator {
+		.footer-separator {
 			opacity: 0.8;
 		}
 	}
@@ -152,41 +189,3 @@ $topbar-height-mobile: 56px;
 .helper-text {
 	opacity: 0.9;
 }
-
-/* ==============================================
-	 Component: sidenav
-	 ============================================== */
-.sidenav {
-	padding-top: 8px;
-	.collapsible-body {
-		li {
-			a {
-				padding-left: 32px !important;
-			}
-		}
-	}
-	.material-icons { margin-right: 8px; }
-
-	// Alignements propres
-	li > a,
-	.collapsible-header {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		height: 48px;
-		line-height: 48px;
-		padding: 0 16px;
-	}
-	// Chevron à droite
-	li > a i.right,
-	.collapsible-header i.right { margin-left: auto; }
-}
-
-/* Bouton burger positionné côté droit dans la topbar */
-.nav-wrapper .sidenav-trigger {
-	display: inline-flex;
-	align-items: center;
-}
-
-/* Evite que le container soit trop étroit sur desktop avec sidebar */
-.app-content main.container { padding-top: 16px; }
