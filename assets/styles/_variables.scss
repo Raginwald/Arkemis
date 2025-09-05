@@ -10,5 +10,20 @@ $sidenav-width-collapsed: 72px !default; // icônes only
 $topbar-height-desktop: 64px !default; // Materialize default
 $topbar-height-mobile: 56px !default;
 
-// Couleurs
-$brand-color: #f4a500 !default;
+// Couleurs principales
+// Couleur primaire (ex-brand): utilisée pour les éléments interactifs, accents, etc.
+$primary-color: #f4a500 !default;
+
+// Palette du thème sombre
+$color-bg: #121212 !default;            // arrière-plan principal
+$color-bg-elevated: #171717 !default;   // arrière-plan légèrement surélevé (nav, barres)
+$color-surface: #1b1b1b !default;       // surfaces (cards, dropdowns)
+$color-border: #2a2a2a !default;        // séparateurs/bords discrets
+$color-text: #e0e0e0 !default;          // texte principal
+$color-text-muted: #bdbdbd !default;    // texte secondaire
+$on-primary: #111111 !default;          // texte sur primaire
+
+// Couleurs secondaires / état
+$secondary-color: #4db6ac !default;     // teal adouci pour états secondaires
+$success-color: #66bb6a !default;       // vert success
+$error-color: #ef5350 !default;         // rouge erreur

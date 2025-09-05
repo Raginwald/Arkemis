@@ -8,9 +8,9 @@
     <title>{% block title %}Arkemis — Simulateurs{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-    {# Material Icons et Materialize CSS #}
+    {# Material Icons #}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    {# Materialize CSS est désormais compilé via Vite #}
 
     {% block stylesheets %}
         {{ vite_entry_link_tags('app') }}
@@ -30,49 +30,51 @@
 
     <!-- Sidebar (fixe sur desktop, drawer sur mobile) -->
     <ul class="sidenav sidenav-fixed" id="sidenav-main" data-turbo-permanent>
-        <li>
+        <li class="{% if app.request.attributes.get('_route') starts with 'app_home' %}active{% endif %}">
             <a href="{{ path('app_home') }}" class="waves-effect sidenav-close">
                 <i class="material-icons">dashboard</i>
                 Accueil
             </a>
         </li>
         <li>
+            {% set currentRoute = app.request.attributes.get('_route') %}
+            {% set isSimu = currentRoute starts with 'app_simulators_' %}
             <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header waves-effect">
+                <li class="{% if isSimu %}active{% endif %}">
+                    <a class="collapsible-header waves-effect{% if isSimu %} active{% endif %}">
                         <i class="material-icons">calculate</i>
                         Simulateurs
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>
-                    <div class="collapsible-body">
+                    <div class="collapsible-body" {% if isSimu %}style="display:block"{% endif %}>
                         <ul>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_mortgage' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">
                                     Crédit immobilier
                                 </a>
                             </li>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_primary_residence' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">
                                     Résidence principale
                                 </a>
                             </li>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_rental_investment' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">
                                     Investissement locatif
                                 </a>
                             </li>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_stock_investment' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">
                                     Placement en bourse
                                 </a>
                             </li>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_rent_plus_invest' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">
                                     Louer + investir l'apport
                                 </a>
                             </li>
                             <li class="divider" tabindex="-1"></li>
-                            <li>
+                            <li class="{% if currentRoute == 'app_simulators_buy_vs_rent' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">
                                     Acheter vs Louer
                                 </a>
@@ -105,8 +107,6 @@
     <!-- JS: Materialize + app.js via Vite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-        // Initialisation automatique de tous les composants Materialize
-        // sans Stimulus ni Turbo. Fonctionne sur chargement complet.
         (function initMaterializeAuto() {
             function boot() {
                 if (window.M && typeof M.AutoInit === 'function') {

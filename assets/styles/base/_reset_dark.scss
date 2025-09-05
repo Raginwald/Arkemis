@@ -1,0 +1,21 @@
+@use "../variables" as *;
+
+/* Reset Dark: couleurs globales, textes et éléments de base */
+html, body {
+  background: $color-bg;
+  color: $color-text;
+}
+
+a { color: $primary-color; text-decoration: none; }
+a:hover, a:focus { color: lighten($primary-color, 10%); }
+
+hr { border-color: $color-border; }
+
+label { color: $color-text-muted; }
+
+input, select, textarea { color: $color-text; }
+::placeholder { color: $color-text-muted; }
+
+.helper-text { color: $color-text-muted; opacity: .9; }
+/* Spécificité pour Materialize */
+.input-field .helper-text { color: $color-text-muted !important; }

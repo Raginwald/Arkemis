@@ -1,0 +1,12 @@
+// Overrides Materialize: définir nos variables AVANT d'importer le framework
+// On utilise @use pour récupérer nos variables, puis on les réassigne en global
+@use "./variables" as v;
+
+$primary-color: v.$primary-color !default;
+$secondary-color: v.$secondary-color !default;
+$success-color: v.$success-color !default;
+$error-color: v.$error-color !default;
+$link-color: v.$primary-color !default;
+
+// Import legacy Materialize SASS (depuis node_modules)
+@import "materialize-css/sass/materialize";
