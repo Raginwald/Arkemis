@@ -20,7 +20,9 @@
     <!-- Topbar minimal (logo + burger) -->
     <nav class="navbar" id="navbar" data-turbo-permanent>
         <div class="nav-wrapper">
-            <a href="{{ path('app_home') }}" class="brand-logo">Arkemis</a>
+            <a href="{{ path('app_home') }}" class="brand-logo">
+                <img src="{{ vite_asset('images/logo-arkemis.svg') }}" alt="Arkemis" />
+            </a>
             <!-- Burger: mobile = ouvre la sidenav (Materialize), desktop = collapse/expand par CSS -->
             <a href="#" data-target="sidenav-main" class="sidenav-trigger js-sidenav-toggle" aria-label="Basculer la navigation" data-turbo="false"><i class="material-icons">menu</i></a>
         </div>
@@ -28,20 +30,53 @@
 
     <!-- Sidebar (fixe sur desktop, drawer sur mobile) -->
     <ul class="sidenav sidenav-fixed" id="sidenav-main" data-turbo-permanent>
-        <li><a href="{{ path('app_home') }}" class="waves-effect sidenav-close"><i class="material-icons">dashboard</i>Accueil</a></li>
+        <li>
+            <a href="{{ path('app_home') }}" class="waves-effect sidenav-close">
+                <i class="material-icons">dashboard</i>
+                Accueil
+            </a>
+        </li>
         <li>
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header waves-effect"><i class="material-icons">calculate</i>Simulateurs<i class="material-icons right">arrow_drop_down</i></a>
+                    <a class="collapsible-header waves-effect">
+                        <i class="material-icons">calculate</i>
+                        Simulateurs
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">Crédit immobilier</a></li>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">Résidence principale</a></li>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">Investissement locatif</a></li>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">Placement en bourse</a></li>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">Louer + investir l'apport</a></li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_mortgage') }}">
+                                    Crédit immobilier
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">
+                                    Résidence principale
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_rental_investment') }}">
+                                    Investissement locatif
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_stock_investment') }}">
+                                    Placement en bourse
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_rent_plus_invest') }}">
+                                    Louer + investir l'apport
+                                </a>
+                            </li>
                             <li class="divider" tabindex="-1"></li>
-                            <li><a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">Acheter vs Louer</a></li>
+                            <li>
+                                <a class="sidenav-close" href="{{ path('app_simulators_buy_vs_rent') }}">
+                                    Acheter vs Louer
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -58,7 +93,9 @@
         <!-- Footer (ligne unique, centré) -->
         <footer class="page-footer">
             <div class="container footer-content center-align grey-text text-lighten-4">
-                <span>Arkemis — Outils de simulation patrimoniale (maquette UI)</span>
+                <span>Arkemis</span>
+                <span class="footer-separator">•</span>
+                <span>Outils de simulation patrimoniale</span>
                 <span class="footer-separator">•</span>
                 <span>© {{ "now"|date('Y') }} Arkemis</span>
             </div>

@@ -52,6 +52,11 @@ $topbar-height-mobile: 56px;
 	left: 0 !important;
 	transform: none !important;
 	margin: 0;
+    height: 100%;
+
+    img {
+        height: 100%;
+    }
 }
 
 // Desktop: topbar plus haute

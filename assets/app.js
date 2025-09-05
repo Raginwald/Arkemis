@@ -1,5 +1,7 @@
 import './bootstrap.js';
 import './app.scss';
+// Import automatique de toutes les images avec eager pour qu'elles soient effectivement traitées
+import.meta.glob(['./images/**'], { eager: true });
 
 // Desktop sidenav collapse/expand toggle
 function initDesktopSidenavToggle() {
