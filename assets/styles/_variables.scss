@@ -27,3 +27,11 @@ $on-primary: #111111 !default;          // texte sur primaire
 $secondary-color: #4db6ac !default;     // teal adouci pour états secondaires
 $success-color: #66bb6a !default;       // vert success
 $error-color: #ef5350 !default;         // rouge erreur
+
+// Palette du thème clair
+$light-color-bg: #f7f7f8 !default;            // arrière-plan principal clair
+$light-color-bg-elevated: #ffffff !default;   // barres/éléments surélevés
+$light-color-surface: #ffffff !default;       // surfaces (cards, dropdowns)
+$light-color-border: #e0e0e0 !default;        // séparateurs/bords discrets
+$light-color-text: #222222 !default;          // texte principal
+$light-color-text-muted: #666666 !default;    // texte secondaire

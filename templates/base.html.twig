@@ -6,7 +6,6 @@
     {# Désactive l'affichage des snapshots Turbo pendant la navigation pour éviter tout écrasement de saisie #}
     <meta name="turbo-cache-control" content="no-preview">
     <title>{% block title %}Arkemis — Simulateurs{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
     {# Material Icons #}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -15,16 +14,34 @@
     {% block stylesheets %}
         {{ vite_entry_link_tags('styles') }}
     {% endblock %}
+    <script>
+        // Applique la classe de thème le plus tôt possible pour éviter le flash
+        (function() {
+            try {
+                var lsKey = 'arkemis-theme';
+                var saved = localStorage.getItem(lsKey);
+                var initial = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (initial === 'light') document.documentElement.classList.add('theme-light');
+                else document.documentElement.classList.add('theme-dark');
+                document.documentElement.setAttribute('data-theme', initial);
+            } catch (e) { /* no-op */ }
+        })();
+    </script>
 </head>
 <body>
     <!-- Topbar minimal (logo + burger) -->
     <nav class="navbar" id="navbar" data-turbo-permanent>
         <div class="nav-wrapper">
+            <!-- Burger: mobile = ouvre la sidenav (Materialize), desktop = collapse/expand par CSS -->
+            <a href="#" data-target="sidenav-main" class="sidenav-trigger js-sidenav-toggle" aria-label="Basculer la navigation" data-turbo="false"><i class="material-icons">menu</i></a>
             <a href="{{ path('app_home') }}" class="brand-logo">
                 <span class="logo" role="img" aria-label="Arkemis"></span>
             </a>
-            <!-- Burger: mobile = ouvre la sidenav (Materialize), desktop = collapse/expand par CSS -->
-            <a href="#" data-target="sidenav-main" class="sidenav-trigger js-sidenav-toggle" aria-label="Basculer la navigation" data-turbo="false"><i class="material-icons">menu</i></a>
+            <div class="nav-spacer"></div>
+            <!-- Bouton thème (même gabarit que le burger, à droite) -->
+            <a href="#" class="js-theme-toggle nav-icon" role="button" aria-label="Basculer le thème" title="Basculer le thème" data-turbo="false" aria-pressed="false">
+                <i class="material-icons js-theme-icon" aria-hidden="true">brightness_6</i>
+            </a>
         </div>
     </nav>
 
@@ -56,7 +73,7 @@
                             </li>
                             <li class="{% if currentRoute == 'app_simulators_primary_residence' %}active{% endif %}">
                                 <a class="sidenav-close" href="{{ path('app_simulators_primary_residence') }}">
-                                    <i class="material-icons">house</i>
+                                    <i class="material-icons">family_restroom</i>
                                     Résidence principale
                                 </a>
                             </li>
@@ -100,7 +117,7 @@
 
         <!-- Footer (ligne unique, centré) -->
         <footer class="page-footer">
-            <div class="container footer-content center-align grey-text text-lighten-4">
+            <div class="container footer-content center-align">
                 <span>Arkemis</span>
                 <span class="footer-separator">•</span>
                 <span>Outils de simulation patrimoniale</span>

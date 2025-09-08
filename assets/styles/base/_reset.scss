@@ -12,9 +12,10 @@ main {
 }
 
 main.container {
-  max-width: 1100px;
+  max-width: 1400px;
   padding-top: 24px;
   padding-bottom: 48px;
+  width: 100% !important;
 }
 
 /* Reset Dark: couleurs globales, textes et éléments de base */

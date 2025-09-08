@@ -5,11 +5,63 @@
 @import "./styles/materialize_overrides";
 
 /* ==============================================
+	 Thèmes: variables CSS (dark par défaut)
+	 ============================================== */
+:root,
+.theme-dark {
+	--primary-color: #{$primary-color};
+	--on-primary: #{$on-primary};
+
+	--color-bg: #{$color-bg};
+	--color-bg-elevated: #{$color-bg-elevated};
+	--color-surface: #{$color-surface};
+	--color-border: #{$color-border};
+	--color-text: #{$color-text};
+	--color-text-muted: #{$color-text-muted};
+
+	/* dérivés */
+	--surface-hover-bg: #{lighten($color-surface, 3%)};
+}
+
+/* ==============================================
+	 Transitions de thème (douces, globales mais limitées au switch)
+	 ============================================== */
+@media (prefers-reduced-motion: no-preference) {
+	html.theme-dark,
+	html.theme-light,
+	html.theme-dark body,
+	html.theme-light body,
+	html.theme-dark *,
+	html.theme-light *,
+	html.theme-dark *::before,
+	html.theme-light *::before,
+	html.theme-dark *::after,
+	html.theme-light *::after {
+		transition: all .3s ease;
+	}
+}
+
+.theme-light {
+	--primary-color: #{$primary-color};
+	--on-primary: #{$on-primary};
+
+	--color-bg: #{$light-color-bg};
+	--color-bg-elevated: #{$light-color-bg-elevated};
+	--color-surface: #{$light-color-surface};
+	--color-border: #{$light-color-border};
+	--color-text: #{$light-color-text};
+	--color-text-muted: #{$light-color-text-muted};
+
+	/* dérivés */
+	--surface-hover-bg: #{lighten($light-color-surface, 3%)};
+}
+
+/* ==============================================
 	 Thème sombre global + primaire
 	 ============================================== */
 html, body {
-	background: $color-bg;
-	color: $color-text;
+	background: var(--color-bg);
+	color: var(--color-text);
 }
 
 /* Liens et accents (hors boutons) — limité au contenu pour exclure le menu */
@@ -53,9 +105,9 @@ input[type="number"],
 input[type="search"],
 textarea,
 select {
-	background: $color-surface;
-	color: $color-text;
-	border-bottom: 1px solid $color-border;
+	background: var(--color-surface);
+	color: var(--color-text);
+	border-bottom: 1px solid var(--color-border);
 }
 input:focus:not([readonly]) + label,
 textarea:focus:not([readonly]) + label {
@@ -68,26 +120,26 @@ select:focus {
 	box-shadow: 0 1px 0 0 $primary-color !important;
 }
 input::placeholder,
-textarea::placeholder { color: $color-text-muted; }
+textarea::placeholder { color: var(--color-text-muted); }
 
 /* Dropdowns, chips, badges */
 .dropdown-content,
 .chips,
-.chip { background: $color-surface; color: $color-text; }
+.chip { background: var(--color-surface); color: var(--color-text); }
 .badge { background: $primary-color; color: $on-primary; }
 
 /* Tables */
-table.striped > tbody > tr:nth-child(odd) { background: $color-bg-elevated; }
-table thead { background: $color-bg-elevated; color: $color-text; }
-table, th, td { border-color: $color-border; }
+table.striped > tbody > tr:nth-child(odd) { background: var(--color-bg-elevated); }
+table thead { background: var(--color-bg-elevated); color: var(--color-text); }
+table, th, td { border-color: var(--color-border); }
 
 /* Collections (listes) */
-.collection { border-color: $color-border; background: $color-surface; }
-.collection .collection-item { background: transparent; color: $color-text; border-bottom: 1px solid $color-border; }
+.collection { border-color: var(--color-border); background: var(--color-surface); }
+.collection .collection-item { background: transparent; color: var(--color-text); border-bottom: 1px solid var(--color-border); }
 
 /* Modals, toasts */
-.modal { background: $color-surface; color: $color-text; }
-.toast { background: $color-bg-elevated; color: $color-text; }
+.modal { background: var(--color-surface); color: var(--color-text); }
+.toast { background: var(--color-bg-elevated); color: var(--color-text); }
 .toast .btn-flat { color: $primary-color; }
 
 /* Pagination */
@@ -96,43 +148,43 @@ table, th, td { border-color: $color-border; }
 
 /* Nav, footer, sidenav */
 .navbar {
-	background: $color-bg-elevated;
-	box-shadow: 0 1px 0 0 $color-border;
+	background: var(--color-bg-elevated);
+	box-shadow: 0 1px 0 0 var(--color-border);
 }
-.sidenav { background: $color-surface; }
+.sidenav { background: var(--color-surface); }
 /* Couleurs de texte claires dans la sidenav avec spécificité élevée */
 .sidenav a,
 .sidenav a:link,
 .sidenav a:visited {
-	color: $color-text !important;
+	color: var(--color-text) !important;
 }
 .sidenav li > a,
 .sidenav .collapsible-header {
-	color: $color-text !important;
+	color: var(--color-text) !important;
 }
 .sidenav .collapsible-body li a {
-	color: $color-text !important;
+	color: var(--color-text) !important;
 	display: flex;
 	align-items: center;
 }
 .sidenav a,
 .sidenav a:link,
-.sidenav a:visited { color: $color-text; }
+.sidenav a:visited { color: var(--color-text); }
 .sidenav a:hover,
 .sidenav .collapsible-header:hover,
 .sidenav .collapsible-body li a:hover {
-	background: lighten($color-surface, 3%);
-	color: $color-text;
+	background: var(--surface-hover-bg);
+	color: var(--color-text);
 }
 /* Hover/focus explicite sur les liens de 1er niveau (Accueil inclus) */
 .sidenav li > a:hover,
 .sidenav li > a:focus {
-	background: lighten($color-surface, 3%);
-	color: $color-text;
+	background: var(--surface-hover-bg);
+	color: var(--color-text);
 }
 .sidenav i.material-icons,
 .sidenav li > a i.material-icons {
-	color: $color-text;
+	color: var(--color-text);
 	margin-right: 8px;
 }
 .sidenav li.active > a,
@@ -148,7 +200,7 @@ table, th, td { border-color: $color-border; }
 /* Icône suit la couleur active */
 .sidenav li.active > a i.material-icons,
 .sidenav li.active .collapsible-header i.material-icons { color: $primary-color !important; }
-.sidenav .collapsible-body { background: $color-surface; }
+.sidenav .collapsible-body { background: var(--color-surface); }
 
 /* Cas spécifique des sous-menus actifs */
 .sidenav .collapsible-body li.active,
@@ -162,10 +214,24 @@ table, th, td { border-color: $color-border; }
 .sidenav li.active > a:hover,
 .sidenav li.active .collapsible-header:hover,
 .sidenav .collapsible-body li.active > a:hover {
-	background: lighten($color-surface, 3%) !important;
+	background: var(--surface-hover-bg) !important;
 	color: $primary-color !important;
 }
-.sidenav .divider { background: $color-border; }
+.sidenav .divider { background: var(--color-border); }
+
+/* Éliminer tout fond sur les éléments actifs de la sidenav (light et dark) */
+.sidenav li.active,
+.sidenav li.active > a,
+.sidenav li.active > a:link,
+.sidenav li.active > a:visited,
+.sidenav .collapsible-header.active,
+.sidenav li.active .collapsible-header,
+.sidenav .collapsible-body li.active,
+.sidenav .collapsible-body li.active > a,
+.sidenav .collapsible-body li.active > a:link,
+.sidenav .collapsible-body li.active > a:visited {
+	background: transparent !important;
+}
 
 /* Collapsible ouvert quand un élément enfant est actif */
 .sidenav .collapsible .active > .collapsible-body { display: block; }
@@ -224,12 +290,12 @@ table, th, td { border-color: $color-border; }
 		align-items: center;
 		justify-content: flex-start; // burger à gauche, logo après
 		gap: 12px;
+		height: 100%;
 
 		.sidenav-trigger {
 			display: inline-flex;
 			align-items: center;
 			margin-left: 0; // reste à gauche
-			order: 0;
 		}
 	}
 
@@ -239,7 +305,6 @@ table, th, td { border-color: $color-border; }
 		transform: none !important;
 		white-space: nowrap;
 		font-weight: 600;
-		order: 1; // vient après le burger
 		margin: 0;
 		height: 100%;
         display: flex;
@@ -255,6 +320,41 @@ table, th, td { border-color: $color-border; }
 			@include svg-mask('./images/logo-arkemis.svg', $primary-color);
 		}
 	}
+	// Assurer le contraste des icônes/texte dans la topbar
+	.material-icons,
+	.brand-logo,
+	.btn-flat {
+		color: var(--color-text);
+	}
+	.sidenav-trigger .material-icons { color: var(--color-text); }
+
+	// Hover/focus: icônes colorées en primaire (burger + thème)
+	.sidenav-trigger:hover .material-icons,
+	.sidenav-trigger:focus-visible .material-icons,
+	.nav-icon:hover .material-icons,
+	.nav-icon:focus-visible .material-icons {
+		color: $primary-color;
+	}
+
+	// Icônes de navbar (liens) identiques visuellement
+	.nav-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		padding: 0 12px;
+		margin: 0;
+		color: var(--color-text);
+	}
+	.nav-icon .material-icons {
+		font-size: 24px;
+		display: inline-block;
+		line-height: 1;
+		height: auto; // hauteur auto pour l'icône
+		vertical-align: middle;
+	}
+
+	// Supprimé les styles spécifiques au bouton pour s'aligner sur le gabarit nav-icon
 }
 
 
@@ -365,9 +465,9 @@ body.sidenav-collapsed {
 	 ============================================== */
 .page-footer {
 	padding-bottom: 20px; // harmonise avec top par défaut
-	background: $color-bg-elevated;
-	color: $color-text;
-	border-top: 1px solid $color-border;
+	background: var(--color-bg-elevated);
+	color: var(--color-text);
+	border-top: 1px solid var(--color-border);
 
 	.footer-content {
 		display: flex;
@@ -383,18 +483,18 @@ body.sidenav-collapsed {
 
 /* Harmoniser la barre inférieure Materialize éventuelle */
 .page-footer .footer-copyright {
-	background: $color-bg-elevated;
-	color: $color-text;
-	border-top: 1px solid $color-border;
+	background: var(--color-bg-elevated);
+	color: var(--color-text);
+	border-top: 1px solid var(--color-border);
 }
 
 /* ==============================================
 	 Component: cards
 	 ============================================== */
 .card {
-	background: $color-surface;
-	color: $color-text;
-	border: 1px solid $color-border;
+	background: var(--color-surface);
+	color: var(--color-text);
+	border: 1px solid var(--color-border);
 	.card-title {
 		display: flex;
 		align-items: center;
@@ -405,3 +505,6 @@ body.sidenav-collapsed {
 .helper-text {
 	opacity: 0.9;
 }
+
+/* Utilitaire pour pousser des éléments à droite dans la navbar */
+.nav-spacer { margin-left: auto; }
