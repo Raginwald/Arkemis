@@ -76,27 +76,32 @@ html, body {
 }
 
 /* Surcharge rapide Materialize (CSS, faute de SASS import) */
-/* Boutons */
+/* Boutons (imbriqués) */
 .btn,
 .btn-large,
 .btn-small,
-.btn-flat.primary {
+.btn-floating {
 	background-color: $primary-color;
 	color: $on-primary;
+
+	&:hover { background-color: lighten($primary-color, 8%); }
+	&:focus { background-color: lighten($primary-color, 6%); }
+	&:active { background-color: darken($primary-color, 2%); }
 }
-.btn:hover,
-.btn-large:hover,
-.btn-small:hover {
-	background-color: lighten($primary-color, 8%);
-}
-.btn-flat {
+
+.btn-flat,
+.btn-flat.primary {
 	color: $primary-color;
+
+	&:hover,
+	&:focus { background-color: rgba($primary-color, 0.08); }
 }
 
 /* Text selection */
 ::selection { background: rgba($primary-color, .35); }
 
 /* Formulaires */
+/* Formulaires (imbriqués) */
 input:not([type]),
 input[type="text"],
 input[type="password"],
@@ -108,19 +113,16 @@ select {
 	background: var(--color-surface);
 	color: var(--color-text);
 	border-bottom: 1px solid var(--color-border);
+
+	&::placeholder { color: var(--color-text-muted); }
+	&:focus {
+		border-bottom: 1px solid $primary-color !important;
+		box-shadow: 0 1px 0 0 $primary-color !important;
+	}
 }
+
 input:focus:not([readonly]) + label,
-textarea:focus:not([readonly]) + label {
-	color: $primary-color;
-}
-input:focus,
-textarea:focus,
-select:focus {
-	border-bottom: 1px solid $primary-color !important;
-	box-shadow: 0 1px 0 0 $primary-color !important;
-}
-input::placeholder,
-textarea::placeholder { color: var(--color-text-muted); }
+textarea:focus:not([readonly]) + label { color: $primary-color; }
 
 /* Dropdowns, chips, badges */
 .dropdown-content,
@@ -128,147 +130,128 @@ textarea::placeholder { color: var(--color-text-muted); }
 .chip { background: var(--color-surface); color: var(--color-text); }
 .badge { background: $primary-color; color: $on-primary; }
 
-/* Tables */
-table.striped > tbody > tr:nth-child(odd) { background: var(--color-bg-elevated); }
-table thead { background: var(--color-bg-elevated); color: var(--color-text); }
-table, th, td { border-color: var(--color-border); }
+/* Tables (imbriquées) */
+table {
+	border-color: var(--color-border);
+
+	&.striped > tbody > tr:nth-child(odd) { background: var(--color-bg-elevated); }
+	thead { background: var(--color-bg-elevated); color: var(--color-text); }
+	th, td { border-color: var(--color-border); }
+}
 
 /* Collections (listes) */
-.collection { border-color: var(--color-border); background: var(--color-surface); }
-.collection .collection-item { background: transparent; color: var(--color-text); border-bottom: 1px solid var(--color-border); }
+.collection {
+	border-color: var(--color-border);
+	background: var(--color-surface);
+
+	.collection-item {
+		background: transparent;
+		color: var(--color-text);
+		border-bottom: 1px solid var(--color-border);
+	}
+}
 
 /* Modals, toasts */
 .modal { background: var(--color-surface); color: var(--color-text); }
 .toast { background: var(--color-bg-elevated); color: var(--color-text); }
 .toast .btn-flat { color: $primary-color; }
 
-/* Pagination */
-.pagination li.active a { background: $primary-color; color: $on-primary; }
-.pagination li a { color: $primary-color; }
+/* Pagination (imbriquée) */
+.pagination {
+	li {
+		a { color: $primary-color; }
+		&.active a { background: $primary-color; color: $on-primary; }
+	}
+}
 
 /* Nav, footer, sidenav */
 .navbar {
 	background: var(--color-bg-elevated);
 	box-shadow: 0 1px 0 0 var(--color-border);
 }
-.sidenav { background: var(--color-surface); }
-/* Couleurs de texte claires dans la sidenav avec spécificité élevée */
-.sidenav a,
-.sidenav a:link,
-.sidenav a:visited {
-	color: var(--color-text) !important;
-}
-.sidenav li > a,
-.sidenav .collapsible-header {
-	color: var(--color-text) !important;
-}
-.sidenav .collapsible-body li a {
-	color: var(--color-text) !important;
-	display: flex;
-	align-items: center;
-}
-.sidenav a,
-.sidenav a:link,
-.sidenav a:visited { color: var(--color-text); }
-.sidenav a:hover,
-.sidenav .collapsible-header:hover,
-.sidenav .collapsible-body li a:hover {
-	background: var(--surface-hover-bg);
-	color: var(--color-text);
-}
-/* Hover/focus explicite sur les liens de 1er niveau (Accueil inclus) */
-.sidenav li > a:hover,
-.sidenav li > a:focus {
-	background: var(--surface-hover-bg);
-	color: var(--color-text);
-}
-.sidenav i.material-icons,
-.sidenav li > a i.material-icons {
-	color: var(--color-text);
-	margin-right: 8px;
-}
-.sidenav li.active > a,
-.sidenav li.active > a:link,
-.sidenav li.active > a:visited,
-.sidenav li.active .collapsible-header,
-.sidenav li.active .collapsible-header:link,
-.sidenav li.active .collapsible-header:visited {
-	/* Lien courant en primaire, sans fond */
-	background: transparent !important;
-	color: $primary-color !important;
-}
-/* Icône suit la couleur active */
-.sidenav li.active > a i.material-icons,
-.sidenav li.active .collapsible-header i.material-icons { color: $primary-color !important; }
-.sidenav .collapsible-body { background: var(--color-surface); }
+/* Sidenav (imbriquée) */
+.sidenav {
+	background: var(--color-surface);
 
-/* Cas spécifique des sous-menus actifs */
-.sidenav .collapsible-body li.active,
-.sidenav .collapsible-body li.active > a,
-.sidenav .collapsible-body li.active > a:link,
-.sidenav .collapsible-body li.active > a:visited {
-	background: transparent !important;
-	color: $primary-color !important;
-}
-/* Hover identique pour actif et non-actif */
-.sidenav li.active > a:hover,
-.sidenav li.active .collapsible-header:hover,
-.sidenav .collapsible-body li.active > a:hover {
-	background: var(--surface-hover-bg) !important;
-	color: $primary-color !important;
-}
-.sidenav .divider { background: var(--color-border); }
+	/* Couleurs de texte claires */
+	a,
+	a:link,
+	a:visited { color: var(--color-text) !important; }
 
-/* Éliminer tout fond sur les éléments actifs de la sidenav (light et dark) */
-.sidenav li.active,
-.sidenav li.active > a,
-.sidenav li.active > a:link,
-.sidenav li.active > a:visited,
-.sidenav .collapsible-header.active,
-.sidenav li.active .collapsible-header,
-.sidenav .collapsible-body li.active,
-.sidenav .collapsible-body li.active > a,
-.sidenav .collapsible-body li.active > a:link,
-.sidenav .collapsible-body li.active > a:visited {
-	background: transparent !important;
-}
+	li > a,
+	.collapsible-header { color: var(--color-text) !important; }
 
-/* Collapsible ouvert quand un élément enfant est actif */
-.sidenav .collapsible .active > .collapsible-body { display: block; }
-.sidenav .collapsible .active > .collapsible-header { color: $primary-color; }
-.btn,
-.btn-large,
-.btn-small,
-.btn-floating {
-	background-color: $primary-color;
-	color: $on-primary;
+	.collapsible-body {
+		background: var(--color-surface);
+
+		li {
+			a {
+				color: var(--color-text) !important;
+				display: flex;
+				align-items: center;
+			}
+
+			&.active,
+			&.active > a,
+			&.active > a:link,
+			&.active > a:visited {
+				background: transparent !important;
+				color: $primary-color !important;
+			}
+
+			&.active > a:hover {
+				background: var(--surface-hover-bg) !important;
+				color: $primary-color !important;
+			}
+		}
+	}
+
+	a:hover,
+	.collapsible-header:hover,
+	.collapsible-body li a:hover {
+		background: var(--surface-hover-bg);
+		color: var(--color-text);
+	}
+
+	/* Hover/focus explicite sur liens de 1er niveau */
+	li > a {
+		&:hover,
+		&:focus {
+			background: var(--surface-hover-bg);
+			color: var(--color-text);
+		}
+
+		i.material-icons { color: var(--color-text); margin-right: 8px; }
+	}
+
+	/* État actif (lien courant en primaire, sans fond) */
+	li.active {
+		> a,
+		> a:link,
+		> a:visited,
+		.collapsible-header,
+		.collapsible-header:link,
+		.collapsible-header:visited {
+			background: transparent !important;
+			color: $primary-color !important;
+		}
+
+		> a i.material-icons,
+		.collapsible-header i.material-icons { color: $primary-color !important; }
+
+		&:hover > a,
+		&:hover .collapsible-header { background: var(--surface-hover-bg) !important; }
+	}
+
+	.divider { background: var(--color-border); }
+
+	/* Collapsible ouvert quand un enfant est actif */
+	.collapsible {
+		.active > .collapsible-body { display: block; }
+		.active > .collapsible-header { color: $primary-color; }
+	}
 }
-.btn:hover,
-.btn-large:hover,
-.btn-small:hover,
-.btn-floating:hover {
-	background-color: lighten($primary-color, 8%);
-}
-.btn:focus,
-.btn-large:focus,
-.btn-small:focus,
-.btn-floating:focus {
-	background-color: lighten($primary-color, 6%);
-}
-.btn:active,
-.btn-large:active,
-.btn-small:active,
-.btn-floating:active {
-	background-color: darken($primary-color, 2%);
-}
-.btn-flat,
-.btn-flat.primary {
-	color: $primary-color;
-}
-.btn-flat:hover,
-.btn-flat:focus {
-	background-color: rgba($primary-color, 0.08);
-}
+/* (Supprimé: doublon des styles boutons, regroupés plus haut) */
 
 /* ==============================================
 	 Layout: navbar
