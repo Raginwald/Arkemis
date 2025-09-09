@@ -15,19 +15,19 @@
         <div class="input-field col s12 m4">
           <input id="loan_amount" name="loanAmount" type="number" step="1000" min="0">
           <label for="loan_amount">Montant emprunté (€)
-            <a href="#" class="info-icon" data-title="Montant emprunté" data-content='Capital du prêt principal (hors PTZ).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Calculez : prix du bien + travaux – apports – PTZ.</li><li>Avec PTZ, indiquez ici uniquement la part au taux nominal.</li></ul><p><span class="ark-popover__badge">Par défaut</span> utilisez votre estimation actuelle.</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Montant emprunté" data-content='Capital du prêt principal (hors PTZ).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Calculez : prix du bien + travaux – apports – PTZ.</li><li>Avec PTZ, indiquez ici uniquement la part au taux nominal.</li></ul><p><span class="ark-popover__badge">Par défaut</span> utilisez votre estimation actuelle.</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="input-field col s12 m4">
           <input id="interest_rate" name="interestRate" type="number" step="0.01" min="0" max="100">
           <label for="interest_rate">Taux nominal (%)
-            <a href="#" class="info-icon" data-title="Taux nominal" data-content='Taux du crédit hors assurance et hors TAEG.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous avez une offre : prenez le taux indiqué.</li><li>Sinon, utilisez un ordre de grandeur du marché pour votre durée.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>4,0 %</strong> si inconnu (à ajuster).</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Taux nominal" data-content='Taux du crédit hors assurance et hors TAEG.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous avez une offre : prenez le taux indiqué.</li><li>Sinon, utilisez un ordre de grandeur du marché pour votre durée.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>4,0 %</strong> si inconnu (à ajuster).</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="input-field col s12 m4">
           <input id="loan_years" name="loanYears" type="number" step="1" min="1" max="40">
           <label for="loan_years">Durée (années)
-            <a href="#" class="info-icon" data-title="Durée du crédit" data-content='Durée totale du prêt principal (années).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Visez une mensualité soutenable (souvent ≤ 30–35 % des revenus).</li><li>Plus long = mensualité plus basse, coût total plus élevé.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>20 ans</strong> (compromis courant).</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Durée du crédit" data-content='Durée totale du prêt principal (années).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Visez une mensualité soutenable (souvent ≤ 30–35 % des revenus).</li><li>Plus long = mensualité plus basse, coût total plus élevé.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>20 ans</strong> (compromis courant).</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
       </div>
@@ -35,13 +35,13 @@
         <div class="input-field col s12 m4">
           <input id="insurance_rate" name="insuranceRate" type="number" step="0.01" min="0" max="10">
           <label for="insurance_rate">Assurance emprunteur (%)
-            <a href="#" class="info-icon" data-title="Taux d’assurance" data-content='Taux annuel de l’assurance emprunteur.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend du profil (âge, santé) et des garanties.</li><li>Les offres « groupe » sont souvent plus élevées que la délégation.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0,20 %</strong> pour un profil standard.</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Taux d’assurance" data-content='Taux annuel de l’assurance emprunteur.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend du profil (âge, santé) et des garanties.</li><li>Les offres « groupe » sont souvent plus élevées que la délégation.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0,20 %</strong> pour un profil standard.</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="col s12 m8">
           <div class="field-group">
             <div class="field-label">Base de calcul de l'assurance emprunteur
-              <a href="#" class="info-icon" data-title="Base de calcul" data-content='Base sur laquelle l’assurance est calculée.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><strong>Capital initial</strong> : prime quasi stable.</li><li><strong>Restant dû</strong> : prime décroissante.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>Capital initial</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
+              <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Base de calcul" data-content='Base sur laquelle l’assurance est calculée.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><strong>Capital initial</strong> : prime quasi stable.</li><li><strong>Restant dû</strong> : prime décroissante.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>Capital initial</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
             </div>
             <div class="switch insurance-basis-switch">
               <label>
@@ -76,19 +76,19 @@
             <div class="input-field col s12 m4">
               <input id="ptz_amount" name="ptzAmount" type="number" step="500" min="0">
               <label for="ptz_amount">Montant PTZ (€)
-                <a href="#" class="info-icon" data-title="Montant PTZ" data-content='Part du financement à 0 % (si éligible).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de zone, revenus et composition du foyer.</li><li>Si incertain, prenez une estimation prudente.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> si non éligible ; sinon votre estimation.</p>'><i class="material-icons">help_outline</i></a>
+                <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Montant PTZ" data-content='Part du financement à 0 % (si éligible).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de zone, revenus et composition du foyer.</li><li>Si incertain, prenez une estimation prudente.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> si non éligible ; sinon votre estimation.</p>'><i class="material-icons">help_outline</i></a>
               </label>
             </div>
             <div class="input-field col s12 m4">
               <input id="ptz_total_years" name="ptzTotalYears" type="number" step="1" min="1" max="25">
               <label for="ptz_total_years">Durée PTZ (années)
-                <a href="#" class="info-icon" data-title="Durée PTZ" data-content='Durée de <em>remboursement</em> du PTZ (hors différé).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de votre tranche (barème PTZ).</li><li>Plus long = mensualité PTZ plus basse.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>15 ans</strong> si inconnu.</p>'><i class="material-icons">help_outline</i></a>
+                <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Durée PTZ" data-content='Durée de <em>remboursement</em> du PTZ (hors différé).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de votre tranche (barème PTZ).</li><li>Plus long = mensualité PTZ plus basse.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>15 ans</strong> si inconnu.</p>'><i class="material-icons">help_outline</i></a>
               </label>
             </div>
             <div class="input-field col s12 m4">
               <input id="ptz_deferred_years" name="ptzDeferredYears" type="number" step="1" min="0" max="20">
               <label for="ptz_deferred_years">Différé (années)
-                <a href="#" class="info-icon" data-title="Différé" data-content='Période initiale sans mensualités PTZ.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Souvent imposé par votre tranche.</li><li>Sinon, 0 si non prévu contractuellement.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0</strong>.</p>'><i class="material-icons">help_outline</i></a>
+                <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Différé" data-content='Période initiale sans mensualités PTZ.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Souvent imposé par votre tranche.</li><li>Sinon, 0 si non prévu contractuellement.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0</strong>.</p>'><i class="material-icons">help_outline</i></a>
               </label>
             </div>
           </div>
@@ -105,25 +105,25 @@
         <div class="input-field col s12 m3">
           <input id="broker_fees" name="brokerFees" type="number" step="1" min="0">
           <label for="broker_fees">Frais de courtage (€)
-            <a href="#" class="info-icon" data-title="Frais de courtage" data-content='Rémunération du courtier.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><em>Forfait</em> : utilisez le montant du mandat.</li><li><em>% plafonné</em> : calculez % × capital puis appliquez le plafond.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 500 €</strong> si courtier, sinon <strong>0 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Frais de courtage" data-content='Rémunération du courtier.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><em>Forfait</em> : utilisez le montant du mandat.</li><li><em>% plafonné</em> : calculez % × capital puis appliquez le plafond.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 500 €</strong> si courtier, sinon <strong>0 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="input-field col s12 m3">
           <input id="file_fees" name="fileFees" type="number" step="1" min="0">
           <label for="file_fees">Frais de dossier (€)
-            <a href="#" class="info-icon" data-title="Frais de dossier" data-content='Frais administratifs de la banque (forfait).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Le plus souvent un forfait indiqué dans l’offre.</li><li>À défaut, utilisez un repère simple.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>300 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Frais de dossier" data-content='Frais administratifs de la banque (forfait).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Le plus souvent un forfait indiqué dans l’offre.</li><li>À défaut, utilisez un repère simple.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>300 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="input-field col s12 m3">
           <input id="warranty_fees" name="warrantyFees" type="number" step="1" min="0">
           <label for="warranty_fees">Garantie (€)
-            <a href="#" class="info-icon" data-title="Garantie" data-content='Coût de la sûreté (caution, hypothèque, PPD).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Approximez à <strong>1 %</strong> du capital (varie 0,5–2 %).</li><li>La <em>caution</em> peut donner une restitution en fin de prêt.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 % × capital</strong> (ex : 200 000 € → 2 000 €).</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="Garantie" data-content='Coût de la sûreté (caution, hypothèque, PPD).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Approximez à <strong>1 %</strong> du capital (varie 0,5–2 %).</li><li>La <em>caution</em> peut donner une restitution en fin de prêt.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 % × capital</strong> (ex : 200 000 € → 2 000 €).</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
         <div class="input-field col s12 m3">
           <input id="early_repayment_penalty" name="earlyRepaymentPenalty" type="number" step="1" min="0">
           <label for="early_repayment_penalty">IRA (€)
-            <a href="#" class="info-icon" data-title="IRA" data-content='Indemnités en cas de remboursement anticipé.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous ne prévoyez rien : mettez 0 €.</li><li>Sinon, estimez avec min(<em>6 mois d’intérêts</em>, <em>3 % du capital</em> remboursé).</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
+            <a href="#" class="info-icon" tabindex="-1" aria-hidden="true" data-title="IRA" data-content='Indemnités en cas de remboursement anticipé.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous ne prévoyez rien : mettez 0 €.</li><li>Sinon, estimez avec min(<em>6 mois d’intérêts</em>, <em>3 % du capital</em> remboursé).</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
           </label>
         </div>
       </div>
@@ -234,6 +234,15 @@
 
   window.addEventListener('scroll', function(){ if (currentAnchor) positionPopover(currentAnchor); }, true);
   window.addEventListener('resize', function(){ if (currentAnchor) positionPopover(currentAnchor); });
+
+      // Désactiver la tabulation sur les icônes d'aide (pas de focus clavier)
+      try {
+        var infoIcons = document.querySelectorAll('.info-icon');
+        infoIcons.forEach(function (el) {
+          el.setAttribute('tabindex', '-1');
+          el.setAttribute('aria-hidden', 'true');
+        });
+      } catch (_) { /* no-op */ }
     });
   </script>
 {% endblock %}
