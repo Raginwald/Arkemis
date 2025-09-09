@@ -257,6 +257,17 @@ table {
 		.active > .collapsible-header { color: $primary-color; }
 	}
 }
+
+/* ==============================================
+	Cards: espace sous le titre
+	============================================== */
+.card .card-content .card-title {
+	display: block; // assurer le flux
+	margin-bottom: 14px; // espace plus généreux sous le titre
+}
+@media screen and (min-width: 992px) {
+	.card .card-content .card-title { margin-bottom: 18px; }
+}
 /* (Supprimé: doublon des styles boutons, regroupés plus haut) */
 
 /* ==============================================
@@ -490,12 +501,31 @@ body.sidenav-collapsed {
 	background: var(--color-surface);
 	color: var(--color-text);
 	border: 1px solid var(--color-border);
-	.card-title {
-		display: flex;
-		align-items: center;
-		gap: 8px;
+	.card-content {
+			.card-title {
+			/* En-tête de card visuellement fort */
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 1.2rem; /* plus grand que le corps */
+			font-weight: 700;
+			line-height: 1.25;
+			color: var(--color-text);
+			background: var(--color-bg-elevated);
+			border-bottom: 1px solid var(--color-border);
+            padding: 12px 24px; /* aligné sur le padding de .card-content */
+            /* bandeau pleine largeur à l'intérieur de la card */
+            margin: -8px -24px 16px -24px; /* remonte un peu et s'aligne aux bords */
+		}
 	}
 }
+	@media screen and (min-width: 992px) {
+		.card .card-content .card-title {
+			font-size: 1.28rem;
+			padding: 14px 28px;
+			margin: -24px -24px 18px -24px;
+		}
+	}
 
 .helper-text {
 	opacity: 0.9;
