@@ -12,6 +12,7 @@
     {# Materialize CSS est désormais compilé via Vite #}
 
     {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
         {{ vite_entry_link_tags('styles') }}
     {% endblock %}
     <script>

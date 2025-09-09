@@ -1,82 +1,67 @@
-{# Simulateur de crédit immobilier (maquette UI) #}
+{# Simulateur de crédit immobilier (centré sur le prêt et ses frais) #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Crédit immobilier — Arkemis{% endblock %}
 
 {% block body %}
   <h4>Crédit immobilier</h4>
-  <p class="grey-text text-darken-1">Renseignez les paramètres de votre prêt. Les champs incluent les règles usuelles (assurance, frais, PTZ). Aucune simulation n'est encore calculée.</p>
+  <p class="grey-text text-darken-1">Renseignez les paramètres du crédit (montant, taux, durée, assurance) et les frais liés au prêt. Le PTZ est optionnel.</p>
 
+  <!-- Paramètres du prêt -->
   <div class="card">
     <div class="card-content">
       <span class="card-title">Paramètres du prêt</span>
       <div class="row">
-        <div class="input-field col s12 m6">
-          <input id="property_price" name="propertyPrice" type="number" step="0.01">
-          <label for="property_price">Prix du bien (€)</label>
-          <span class="helper-text">Prix acte en main hors frais de notaire. Incluez les annexes si applicables.</span>
-        </div>
-        <div class="input-field col s12 m6">
-          <input id="down_payment" name="downPayment" type="number" step="0.01">
-          <label for="down_payment">Apport (€)</label>
-          <span class="helper-text">Somme mobilisée au comptant (épargne). Peut réduire le montant emprunté.</span>
-        </div>
-
         <div class="input-field col s12 m4">
-          <input id="loan_amount" name="loanAmount" type="number" step="0.01">
-          <label for="loan_amount">Montant emprunté (€)</label>
-          <span class="helper-text">Montant total du crédit hors PTZ. Calculé ou saisi librement pour la maquette.</span>
+          <input id="loan_amount" name="loanAmount" type="number" step="1000" min="0">
+          <label for="loan_amount">Montant emprunté (€)
+            <a href="#" class="info-icon" data-title="Montant emprunté" data-content='Capital du prêt principal (hors PTZ).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Calculez : prix du bien + travaux – apports – PTZ.</li><li>Avec PTZ, indiquez ici uniquement la part au taux nominal.</li></ul><p><span class="ark-popover__badge">Par défaut</span> utilisez votre estimation actuelle.</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
         <div class="input-field col s12 m4">
-          <input id="interest_rate" name="interestRate" type="number" step="0.001">
-          <label for="interest_rate">Taux nominal (%)</label>
-          <span class="helper-text">Taux annuel fixe hors assurance (TAEG non inclus). Exemple: 4.20</span>
+          <input id="interest_rate" name="interestRate" type="number" step="0.01" min="0" max="100">
+          <label for="interest_rate">Taux nominal (%)
+            <a href="#" class="info-icon" data-title="Taux nominal" data-content='Taux du crédit hors assurance et hors TAEG.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous avez une offre : prenez le taux indiqué.</li><li>Sinon, utilisez un ordre de grandeur du marché pour votre durée.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>4,0 %</strong> si inconnu (à ajuster).</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
         <div class="input-field col s12 m4">
-          <input id="loan_years" name="loanYears" type="number" step="1">
-          <label for="loan_years">Durée (années)</label>
-          <span class="helper-text">Durée totale du prêt (10 à 30 ans usuellement).</span>
+          <input id="loan_years" name="loanYears" type="number" step="1" min="1" max="40">
+          <label for="loan_years">Durée (années)
+            <a href="#" class="info-icon" data-title="Durée du crédit" data-content='Durée totale du prêt principal (années).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Visez une mensualité soutenable (souvent ≤ 30–35 % des revenus).</li><li>Plus long = mensualité plus basse, coût total plus élevé.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>20 ans</strong> (compromis courant).</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
-
+      </div>
+      <div class="row insurance-row" style="align-items:center;">
         <div class="input-field col s12 m4">
-          <input id="insurance_rate" name="insuranceRate" type="number" step="0.001">
-          <label for="insurance_rate">Assurance (%)</label>
-          <span class="helper-text">Taux annuel de l'assurance emprunteur (sur capital initial ou restant dû selon contrat).</span>
+          <input id="insurance_rate" name="insuranceRate" type="number" step="0.01" min="0" max="10">
+          <label for="insurance_rate">Assurance emprunteur (%)
+            <a href="#" class="info-icon" data-title="Taux d’assurance" data-content='Taux annuel de l’assurance emprunteur.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend du profil (âge, santé) et des garanties.</li><li>Les offres « groupe » sont souvent plus élevées que la délégation.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0,20 %</strong> pour un profil standard.</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
-        <div class="input-field col s12 m4">
-          <input id="notary_fees" name="notaryFees" type="number" step="0.01">
-          <label for="notary_fees">Frais de notaire (€)</label>
-          <span class="helper-text">Ancien: ~7-8% du prix; Neuf: ~2-3%. Inclut droits d'enregistrement, émoluments, débours.</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="broker_fees" name="brokerFees" type="number" step="0.01">
-          <label for="broker_fees">Frais de courtage (€)</label>
-          <span class="helper-text">Honoraires du courtier, parfois inclus dans le TAEG.</span>
-        </div>
-
-        <div class="input-field col s12 m4">
-          <input id="file_fees" name="fileFees" type="number" step="0.01">
-          <label for="file_fees">Frais de dossier (€)</label>
-          <span class="helper-text">Frais bancaires d'ouverture du crédit.</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="warranty_fees" name="warrantyFees" type="number" step="0.01">
-          <label for="warranty_fees">Garantie (€)</label>
-          <span class="helper-text">Hypothèque, caution (type Crédit Logement) ou PPD selon cas.</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="early_repayment_penalty" name="earlyRepaymentPenalty" type="number" step="0.01">
-          <label for="early_repayment_penalty">IRA (€)</label>
-          <span class="helper-text">Indemnité de remboursement anticipé (max 6 mois d'intérêts, plafonnée à 3%).</span>
+        <div class="col s12 m8">
+          <div class="field-group">
+            <div class="field-label">Base de calcul de l'assurance emprunteur
+              <a href="#" class="info-icon" data-title="Base de calcul" data-content='Base sur laquelle l’assurance est calculée.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><strong>Capital initial</strong> : prime quasi stable.</li><li><strong>Restant dû</strong> : prime décroissante.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>Capital initial</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
+            </div>
+            <div class="switch insurance-basis-switch">
+              <label>
+                Capital initial
+                <input id="insurance_basis_switch" type="checkbox">
+                <span class="lever"></span>
+                Restant dû
+              </label>
+            </div>
+          </div>
+          <input type="hidden" id="insurance_basis" name="insuranceBasis" value="initial">
         </div>
       </div>
     </div>
   </div>
 
+  <!-- PTZ avant frais -->
   <div class="card">
     <div class="card-content">
       <span class="card-title">Prêt à Taux Zéro (PTZ)</span>
-      <p class="grey-text text-darken-1">Le PTZ est soumis à conditions (plafonds de revenus, zone, nature du bien). Ici, on prépare les champs pour l'intégrer.</p>
       <div class="row" style="margin-top: 16px;">
         <div class="switch col s12">
           <label>
@@ -86,61 +71,60 @@
             Activé
           </label>
         </div>
-        <div class="input-field col s12 m4">
-          <input id="ptz_amount" name="ptzAmount" type="number" step="0.01">
-          <label for="ptz_amount">Montant PTZ (€)</label>
-          <span class="helper-text">Plafonné selon zone et composition du foyer (barèmes officiels).</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="ptz_deferred_years" name="ptzDeferredYears" type="number" step="1">
-          <label for="ptz_deferred_years">Différé (années)</label>
-          <span class="helper-text">Durée de différé de remboursement (partiel/total) suivant profil.</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="ptz_total_years" name="ptzTotalYears" type="number" step="1">
-          <label for="ptz_total_years">Durée PTZ (années)</label>
-          <span class="helper-text">Durée totale du PTZ incluant différé et amortissement.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">Charges récurrentes</span>
-      <div class="row">
-        <div class="input-field col s12 m4">
-          <input id="property_tax" name="propertyTax" type="number" step="0.01">
-          <label for="property_tax">Taxe foncière (€ / an)</label>
-          <span class="helper-text">Basée sur valeur locative cadastrale; dépend de la commune.</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="hoa_fees" name="hoaFees" type="number" step="0.01">
-          <label for="hoa_fees">Charges de copropriété (€ / an)</label>
-          <span class="helper-text">Entretien, syndic, fonds travaux (loi ALUR).</span>
-        </div>
-        <div class="input-field col s12 m4">
-          <input id="maintenance" name="maintenance" type="number" step="0.01">
-          <label for="maintenance">Entretien (€ / an)</label>
-          <span class="helper-text">Provision pour travaux courants (toiture, chaudière, etc.).</span>
+        <div id="ptz_fields" class="col s12" style="margin-top: 8px; display: none;">
+          <div class="row ptz-row">
+            <div class="input-field col s12 m4">
+              <input id="ptz_amount" name="ptzAmount" type="number" step="500" min="0">
+              <label for="ptz_amount">Montant PTZ (€)
+                <a href="#" class="info-icon" data-title="Montant PTZ" data-content='Part du financement à 0 % (si éligible).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de zone, revenus et composition du foyer.</li><li>Si incertain, prenez une estimation prudente.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> si non éligible ; sinon votre estimation.</p>'><i class="material-icons">help_outline</i></a>
+              </label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="ptz_total_years" name="ptzTotalYears" type="number" step="1" min="1" max="25">
+              <label for="ptz_total_years">Durée PTZ (années)
+                <a href="#" class="info-icon" data-title="Durée PTZ" data-content='Durée de <em>remboursement</em> du PTZ (hors différé).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Dépend de votre tranche (barème PTZ).</li><li>Plus long = mensualité PTZ plus basse.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>15 ans</strong> si inconnu.</p>'><i class="material-icons">help_outline</i></a>
+              </label>
+            </div>
+            <div class="input-field col s12 m4">
+              <input id="ptz_deferred_years" name="ptzDeferredYears" type="number" step="1" min="0" max="20">
+              <label for="ptz_deferred_years">Différé (années)
+                <a href="#" class="info-icon" data-title="Différé" data-content='Période initiale sans mensualités PTZ.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Souvent imposé par votre tranche.</li><li>Sinon, 0 si non prévu contractuellement.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0</strong>.</p>'><i class="material-icons">help_outline</i></a>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Frais liés au crédit -->
   <div class="card">
     <div class="card-content">
-      <span class="card-title">Aides et dispositifs</span>
+      <span class="card-title">Frais liés au crédit</span>
       <div class="row">
-        <div class="input-field col s12 m6">
-          <input id="energy_subsidies" name="energySubsidies" type="number" step="0.01">
-          <label for="energy_subsidies">Aides rénovation énergétique (€)</label>
-          <span class="helper-text">Ex: MaPrimeRénov', certificats d'économie d'énergie (CEE).</span>
+        <div class="input-field col s12 m3">
+          <input id="broker_fees" name="brokerFees" type="number" step="1" min="0">
+          <label for="broker_fees">Frais de courtage (€)
+            <a href="#" class="info-icon" data-title="Frais de courtage" data-content='Rémunération du courtier.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li><em>Forfait</em> : utilisez le montant du mandat.</li><li><em>% plafonné</em> : calculez % × capital puis appliquez le plafond.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 500 €</strong> si courtier, sinon <strong>0 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
-        <div class="input-field col s12 m6">
-          <input id="other_grants" name="otherGrants" type="number" step="0.01">
-          <label for="other_grants">Autres aides (€)</label>
-          <span class="helper-text">Aides locales, prêt action logement, etc.</span>
+        <div class="input-field col s12 m3">
+          <input id="file_fees" name="fileFees" type="number" step="1" min="0">
+          <label for="file_fees">Frais de dossier (€)
+            <a href="#" class="info-icon" data-title="Frais de dossier" data-content='Frais administratifs de la banque (forfait).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Le plus souvent un forfait indiqué dans l’offre.</li><li>À défaut, utilisez un repère simple.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>300 €</strong>.</p>'><i class="material-icons">help_outline</i></a>
+          </label>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="warranty_fees" name="warrantyFees" type="number" step="1" min="0">
+          <label for="warranty_fees">Garantie (€)
+            <a href="#" class="info-icon" data-title="Garantie" data-content='Coût de la sûreté (caution, hypothèque, PPD).</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Approximez à <strong>1 %</strong> du capital (varie 0,5–2 %).</li><li>La <em>caution</em> peut donner une restitution en fin de prêt.</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>1 % × capital</strong> (ex : 200 000 € → 2 000 €).</p>'><i class="material-icons">help_outline</i></a>
+          </label>
+        </div>
+        <div class="input-field col s12 m3">
+          <input id="early_repayment_penalty" name="earlyRepaymentPenalty" type="number" step="1" min="0">
+          <label for="early_repayment_penalty">IRA (€)
+            <a href="#" class="info-icon" data-title="IRA" data-content='Indemnités en cas de remboursement anticipé.</p><div class="ark-popover__divider"></div><div class="ark-popover__label">Comment choisir ?</div><ul><li>Si vous ne prévoyez rien : mettez 0 €.</li><li>Sinon, estimez avec min(<em>6 mois d’intérêts</em>, <em>3 % du capital</em> remboursé).</li></ul><p><span class="ark-popover__badge">Par défaut</span> <strong>0 €</strong> (le plus courant).</p>'><i class="material-icons">help_outline</i></a>
+          </label>
         </div>
       </div>
     </div>
@@ -152,4 +136,210 @@
       <i class="material-icons right">play_arrow</i>
     </a>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // PTZ show/hide
+      var ptzEnabled = document.getElementById('ptz_enabled');
+      var ptzFields = document.getElementById('ptz_fields');
+      function updatePtzVisibility() {
+        if (!ptzEnabled || !ptzFields) return;
+        ptzFields.style.display = ptzEnabled.checked ? 'block' : 'none';
+      }
+      if (ptzEnabled) {
+        ptzEnabled.addEventListener('change', updatePtzVisibility);
+        updatePtzVisibility();
+      }
+
+      // Insurance basis switch -> hidden field
+      var basisSwitch = document.getElementById('insurance_basis_switch');
+      var basisHidden = document.getElementById('insurance_basis');
+      function updateBasis() {
+        var isRemaining = basisSwitch && basisSwitch.checked;
+        if (basisHidden) basisHidden.value = isRemaining ? 'remaining' : 'initial';
+      }
+      if (basisSwitch) {
+        basisSwitch.addEventListener('change', updateBasis);
+        updateBasis();
+      }
+
+  // Popover (click) handling for .info-icon (pas d'effet de "déplacement")
+  var popoverEl = document.createElement('div');
+  popoverEl.className = 'ark-popover';
+  popoverEl.style.visibility = 'hidden';
+  popoverEl.style.opacity = '0';
+  document.body.appendChild(popoverEl);
+
+      var currentAnchor = null;
+      function closePopover() {
+        // fermeture immédiate pour éviter l'impression de déplacement
+        popoverEl.style.opacity = '0';
+        popoverEl.style.visibility = 'hidden';
+        currentAnchor = null;
+      }
+      function openPopover(anchor, title, content) {
+        // ferme d'abord pour éviter tout repositionnement visible
+        closePopover();
+        popoverEl.innerHTML = '<div class="ark-popover__header">' + title + '</div>' +
+                              '<div class="ark-popover__content">' + content + '</div>';
+        currentAnchor = anchor;
+        positionPopover(anchor);
+        // ré-ouvre instantanément
+        popoverEl.style.visibility = 'visible';
+        popoverEl.style.opacity = '1';
+      }
+      function positionPopover(anchor) {
+        var rect = anchor.getBoundingClientRect();
+        var top = rect.bottom + 8; // position fixed relative to viewport
+        var left = rect.left;      // align left edge under icon
+        // keep on screen horizontally
+        var viewportWidth = window.innerWidth;
+        var width = popoverEl.offsetWidth || 360;
+        if (left + width > viewportWidth - 12) left = viewportWidth - width - 12;
+        if (left < 12) left = 12;
+        // keep on screen vertically (if too low, place above)
+        var height = popoverEl.offsetHeight || 180;
+        if (top + height > window.innerHeight - 12) top = rect.top - height - 8;
+        if (top < 12) top = 12;
+        popoverEl.style.top = top + 'px';
+        popoverEl.style.left = left + 'px';
+      }
+
+  // Click pour ouvrir/fermer la popover, clic extérieur pour fermer
+  document.addEventListener('click', function (e) {
+    var icon = e.target.closest && e.target.closest('.info-icon');
+    if (icon) {
+      e.preventDefault();
+      var title = icon.getAttribute('data-title') || '';
+      var content = icon.getAttribute('data-content') || '';
+      // toggle si on clique la même icône
+      if (currentAnchor === icon && popoverEl.style.visibility === 'visible') {
+        closePopover();
+      } else {
+        openPopover(icon, title, content);
+      }
+      return;
+    }
+    // clic en dehors
+    if (popoverEl && popoverEl.style.visibility === 'visible') {
+      closePopover();
+    }
+  }, true);
+
+  // La popover n'intercepte pas le pointeur (elle n'est pas interactive)
+  popoverEl.style.pointerEvents = 'none';
+
+  window.addEventListener('scroll', function(){ if (currentAnchor) positionPopover(currentAnchor); }, true);
+  window.addEventListener('resize', function(){ if (currentAnchor) positionPopover(currentAnchor); });
+    });
+  </script>
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <style>
+    /* Icone info à la fin du label (éviter tronquage) */
+  label .info-icon { display:inline-block; margin-left:6px; color:#607d8b; vertical-align:middle; line-height: 1; }
+  .info-icon { display:inline-block; margin-left:6px; color:#607d8b; vertical-align:middle; line-height: 1; }
+  .info-icon .material-icons { font-size: 18px; line-height: 18px; height: 18px; display:inline-block; vertical-align: middle; }
+  label { display:inline-flex; align-items:center; gap:4px; line-height: 1.2; }
+
+    /* Popover élégante avec header */
+    .ark-popover {
+      position: fixed;
+      z-index: 2000;
+      max-width: 420px;
+      background: #ffffff;
+      color: #263238;
+      border-radius: 0;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.05);
+      overflow: hidden;
+  transition: none;
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    @media (prefers-color-scheme: dark) {
+      .ark-popover {
+        background: #1e1e1e;
+        color: #e0e0e0;
+        border-color: rgba(255,255,255,0.08);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.6), 0 10px 10px rgba(0,0,0,0.4);
+      }
+      .ark-popover__header { background: #2a2a2a; border-bottom-color: rgba(255,255,255,0.06); }
+    }
+    .ark-popover__header {
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: rgba(244,165,0,0.12);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      color: #f4a500;
+    }
+    .ark-popover__content { padding: 12px 14px; }
+    .ark-popover__content em { font-style: italic; }
+    .ark-popover__content ul {
+      margin: 6px 0 8px;
+      padding-left: 18px;
+      list-style-type: disc !important;
+      list-style-position: outside;
+    }
+    .ark-popover__content ul li {
+      margin: 3px 0;
+      list-style-type: disc !important;
+    }
+    .ark-popover__divider {
+      margin: 10px 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .ark-popover__label {
+      margin: 6px 0 4px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #455a64;
+    }
+    .ark-popover__badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: rgba(244,165,0,0.12);
+      color: #f4a500;
+      font-weight: 600;
+      font-size: 0.78rem;
+      vertical-align: baseline;
+    }
+    @media (prefers-color-scheme: dark) {
+      .ark-popover__divider { border-top-color: rgba(255,255,255,0.12); }
+      .ark-popover__label { color: #cfd8dc; }
+      .ark-popover__badge { background: rgba(255,200,0,0.15); color: #ffcc40; }
+    }
+
+    /* Groupe assurance: label au-dessus, switch centré avec libellés gauche/droite */
+    .field-group { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+  .field-group .field-label { font-size:0.95rem; color: inherit; display:flex; align-items:center; }
+    .switch-row { display:flex; align-items:center; gap:12px; }
+    .switch-text { color: inherit; font-size:0.95rem; }
+
+  /* Alignement row assurance */
+  .insurance-row .field-group { margin-top: 8px; }
+
+  /* Interaction: rendre toute la zone du label cliquable comme pour PTZ */
+  .insurance-basis-switch label { cursor: pointer; }
+  .switch label { cursor: pointer; }
+  .switch label span.lever { margin: 0 8px; }
+
+    /* Switch Materialize en couleur primaire */
+    .switch label input[type="checkbox"]:checked + .lever {
+      background-color: rgba(244,165,0,0.3); /* derive from $primary-color with alpha */
+    }
+    .switch label input[type="checkbox"]:checked + .lever:after {
+      background-color: #f4a500; /* $primary-color */
+    }
+  /* PTZ: réduire l’espace inférieur et éviter le wrap indésirable */
+  .ptz-row { margin-top: 8px; margin-bottom: 0; }
+  #ptz_fields .input-field { margin-bottom: 0; }
+  </style>
 {% endblock %}

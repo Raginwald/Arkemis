@@ -11,7 +11,11 @@ export default defineConfig({
             stimulus: true,
         }),
     ],
+    css: {
+        devSourcemap: true,
+    },
     build: {
+        sourcemap: true,
         rollupOptions: {
             input: {
                 app: "./assets/app.js",
