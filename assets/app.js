@@ -1,6 +1,17 @@
 import './bootstrap.js';
 // Import automatique de toutes les images avec eager pour qu'elles soient effectivement traitées
 import.meta.glob(['./images/**'], { eager: true });
+// Charge paresseuse des modules spécifiques pages
+let mortgageInit = null;
+async function initPageModules() {
+	const root = document.getElementById('mortgage-simulator');
+	if (root) {
+		const { MortgageSimulator } = await import('./js/simulators/MortgageSimulator.js');
+		const sim = new MortgageSimulator(root);
+		sim.init();
+		mortgageInit = sim;
+	}
+}
 
 // Thème: init + toggle + persistance
 function initThemeToggle() {
@@ -53,10 +64,12 @@ if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', () => {
 		initDesktopSidenavToggle();
 		initThemeToggle();
+		initPageModules();
 	}, { once: true });
 } else {
 	initDesktopSidenavToggle();
 	initThemeToggle();
+	initPageModules();
 }
 
 console.log('Vite app.js initialisé.');

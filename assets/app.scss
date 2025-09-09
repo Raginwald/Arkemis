@@ -533,3 +533,89 @@ body.sidenav-collapsed {
 
 /* Utilitaire pour pousser des éléments à droite dans la navbar */
 .nav-spacer { margin-left: auto; }
+
+/* ==============================================
+	 Simulateur crédit immo: styles spécifiques
+	 ============================================== */
+/* Popover globale (attachée au body) */
+.ark-popover {
+	position: fixed;
+	z-index: 2000;
+	max-width: 420px;
+	background: var(--color-surface);
+	color: var(--color-text);
+	border-radius: 0;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.12);
+	border: 1px solid var(--color-border);
+	overflow: hidden;
+	transition: none;
+	font-size: 0.92rem;
+	line-height: 1.4;
+}
+.ark-popover__header {
+	padding: 10px 14px;
+	font-weight: 600;
+	font-size: 0.95rem;
+	background: rgba($primary-color, 0.14);
+	border-bottom: 1px solid var(--color-border);
+	color: $primary-color;
+}
+.ark-popover__content { padding: 12px 14px; }
+.ark-popover__content em { font-style: italic; }
+.ark-popover__content ul {
+	margin: 6px 0 8px;
+	padding-left: 18px;
+	list-style-type: disc !important;
+	list-style-position: outside;
+}
+.ark-popover__content ul li {
+	margin: 3px 0;
+	list-style-type: disc !important;
+}
+.ark-popover__divider { margin: 10px 0; border-top: 1px solid var(--color-border); }
+.ark-popover__label { margin: 6px 0 4px; font-weight: 600; font-size: 0.88rem; color: var(--color-text-muted); }
+.ark-popover__badge {
+	display: inline-block;
+	padding: 1px 6px;
+    margin-right: 3px;
+	border-radius: 3px;
+	background: rgba($primary-color, 0.14);
+	color: $primary-color;
+	font-weight: 600;
+	font-size: 0.78rem;
+	vertical-align: baseline;
+}
+
+#mortgage-simulator.sim-mortgage {
+	/* Icônes info intégrées aux labels */
+	label .info-icon,
+	.info-icon {
+		display: inline-block;
+		margin-left: 6px;
+		vertical-align: middle;
+		line-height: 1;
+	}
+	.info-icon .material-icons {
+		font-size: 18px;
+		line-height: 18px;
+		height: 18px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	label { display: inline-flex; align-items: center; gap: 4px; line-height: 1.2; }
+
+	/* Groupe assurance + switches */
+	.field-group { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+	.field-group .field-label { font-size: 0.95rem; color: inherit; display: flex; align-items: center; }
+	.switch-row { display: flex; align-items: center; gap: 12px; }
+	.switch-text { color: inherit; font-size: 0.95rem; }
+	.insurance-row .field-group { margin-top: 8px; }
+	.insurance-basis-switch label, .switch label { cursor: pointer; }
+	.switch label span.lever { margin: 0 8px; }
+	.switch label input[type="checkbox"]:checked + .lever { background-color: rgba(244,165,0,0.3); }
+	.switch label input[type="checkbox"]:checked + .lever:after { background-color: #f4a500; }
+
+	/* PTZ spacing */
+	.ptz-row { margin-top: 8px; margin-bottom: 0; }
+	#ptz_fields .input-field { margin-bottom: 0; }
+}
